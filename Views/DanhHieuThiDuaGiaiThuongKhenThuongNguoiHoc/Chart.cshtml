@@ -1,0 +1,146 @@
+﻿@model IEnumerable<C500Hemis.Models.TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc>
+@{
+
+    ViewData["Title"] = "Index";
+
+    var capKhenThuong = ViewData["CapKhenThuong"];
+    var ptKhenThuong = ViewData["PhuongThucKhenThuong"];
+    var loaiDanhHieu = ViewData["LoaiDanhHieu"];
+
+    // Kiểm tra null cho Model
+    if (Model != null)
+    {
+        var ctn = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chủ tịch nước");
+        var cp = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chính phủ");
+        var bo = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Bộ");
+        var dp = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Địa phương");
+        var ccs = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Cấp cơ sở");
+    }
+    else
+    {
+        // Gán giá trị mặc định nếu Model là null
+        var ctn = 0;
+        var cp = 0;
+        var bo = 0;
+        var dp = 0;
+        var ccs = 0;
+    }
+}
+
+<div class="container d-flex justify-content-between">
+    <div>
+        <div>Biểu đồ phân bố cấp khen thưởng</div>
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <div>
+        <div>Biểu đồ phương thức khen thưởng</div>
+        <canvas id="myChart1" width="400" height="400"></canvas>
+    </div>
+    <div>
+        <div>Loại danh hiệu thi đua giải thưởng khen thưởng </div>
+        <canvas id="myChart2" width="400" height="400"></canvas>
+    </div>
+
+</div>
+
+@if (Model == null)
+{
+    <div class="alert alert-warning">
+        Không có dữ liệu để hiển thị
+    </div>
+}
+@* else *@
+@* { *@
+@*     <script> *@
+@*         var ctx = document.getElementById('myChart').getContext('2d'); *@
+@*         var myChart = new Chart(ctx, { *@
+@*             type: 'pie', *@
+@*             data: { *@
+@*                 labels: ['Chủ tịch nước', 'Chính phủ', 'Bộ', 'Địa phương', 'Cấp cơ sở'], *@
+@*                 datasets: [{ *@
+@*                     label: 'Số lượng theo cấp khen thưởng', *@
+@*                     data: [@(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chủ tịch nước")), *@
+@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chính phủ")), *@
+@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Bộ")), *@
+@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Địa phương")), *@
+@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Cấp cơ sở"))], *@
+@*                     backgroundColor: [ *@
+@*                         'rgba(255, 99, 132, 0.2)', *@
+@*                         'rgba(54, 162, 235, 0.2)', *@
+@*                         'rgba(255, 206, 86, 0.2)', *@
+@*                         'rgba(75, 192, 192, 0.2)', *@
+@*                         'rgba(153, 102, 255, 0.2)' *@
+@*                     ], *@
+@*                     borderColor: [ *@
+@*                         'rgba(255, 99, 132, 1)', *@
+@*                         'rgba(54, 162, 235, 1)', *@
+@*                         'rgba(255, 206, 86, 1)', *@
+@*                         'rgba(75, 192, 192, 1)', *@
+@*                         'rgba(153, 102, 255, 1)' *@
+@*                     ], *@
+@*                     borderWidth: 1 *@
+@*                 }] *@
+@*             }, *@
+@*             options: { *@
+@*                 responsive: true, *@
+@*                 plugins: { *@
+@*                     legend: { *@
+@*                         position: 'top', *@
+@*                     }, *@
+@*                     title: { *@
+@*                         display: true, *@
+@*                         text: 'Biểu đồ phân bố cấp khen thưởng' *@
+@*                     } *@
+@*                 } *@
+@*             } *@
+@*         }); *@
+@*     </script> *@
+@* } *@
+
+
+@section Styles {
+    <style>
+        #myChart,
+        #myChart1,
+        #myChart2 {
+            width: 350px !important;
+            height: 350px !important;
+        }
+    </style>
+}
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/assets/js/chart.js"></script>
+    <script>
+        // Cap Khen Thuong
+        var capKhenThuong = @Html.Raw(Json.Serialize(capKhenThuong));
+        var capLabels = capKhenThuong.map(function(item) {
+            return item.capKhenThuong;
+        });
+        var pcapData = capKhenThuong.map(function(item) {
+            return item.count;
+        });
+        createPieChart('myChart', capLabels,'Cap Khen Thuong Count', pcapData);
+        // PThuc Khen Thuong
+        var PthucKhenThuong = @Html.Raw(Json.Serialize(ptKhenThuong));
+        var ptLabels = PthucKhenThuong.map(function(item) {
+            return item.ptKhenThuong;
+        });
+        var ptData = PthucKhenThuong.map(function(item) {
+            return item.count;
+        });
+        createPieChart('myChart1', ptLabels,'PThuc Khen Thuong Count', ptData);
+
+        // Loai Danh Hieu
+        var loaiDanhHieu = @Html.Raw(Json.Serialize(loaiDanhHieu));
+        var lLabels = loaiDanhHieu.map(function(item) {
+            return item.loaiDanhHieu;
+        });
+        var lData = loaiDanhHieu.map(function(item) {
+            return item.count;
+        });
+        createPieChart('myChart2', lLabels,'Loai Danh Hieu Count', lData);
+
+
+    </script>
+}

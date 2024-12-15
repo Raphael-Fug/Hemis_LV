@@ -1,0 +1,175 @@
+﻿@model C500Hemis.Models.TbThongTinNguoiHocGdtc
+
+@{
+    ViewData["Title"] = "XÓA HỒ SƠ";
+}
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Tạo nền cho body với hình ảnh động */
+        body::before {
+            content: '';
+            position: fixed; /* Giữ vị trí cố định */
+            top: 0;
+            left: 0;
+            width: 100%; /* Chiều rộng 100% */
+            height: 100%; /* Chiều cao 100% */
+            background-image: url('/images/son.jpg'); /* Hình nền */
+            background-size: cover; /* Lấp đầy không gian */
+            background-position: center; /* Căn giữa hình nền */
+            background-attachment: fixed; /* Hình nền không di chuyển khi cuộn */
+            z-index: -1; /* Đặt dưới cùng */
+        }
+
+        /* Căn giữa tổng thể cho phần tử chứa */
+        .total {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa */
+            margin-top: 50px; /* Khoảng cách trên */
+            margin-bottom: 50px; /* Khoảng cách dưới */
+        }
+
+        /* Định dạng cho bảng thông tin */
+        .form_del {
+            background-color: #f0f0f0; /* Màu nền bảng */
+            padding: 20px; /* Khoảng cách bên trong */
+            border-radius: 10px; /* Bo góc */
+            width: 50%; /* Chiều rộng 50% */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Tiêu đề nổi "Xóa thông tin việc làm sau tốt nghiệp" */
+        h1 {
+            font-size: 36px; /* Kích thước chữ */
+            text-align: center; /* Căn giữa */
+            color: #e3342f; /* Màu chữ */
+            margin-bottom: 20px; /* Khoảng cách dưới */
+        }
+
+        /* Lời nhắn: có muốn xóa hay không? */
+        h3 {
+            text-align: center; /* Căn giữa */
+            font-size: 24px; /* Kích thước chữ */
+            color: #333; /* Màu chữ */
+            margin-bottom: 20px; /* Khoảng cách dưới */
+        }
+
+        /* Định dạng cho bảng thông tin với lưới 2 cột */
+        .row {
+            display: grid; /* Sử dụng grid layout */
+            grid-template-columns: 50% 50%; /* Mỗi cột chiếm 50% */
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+            padding: 15px; /* Khoảng cách bên trong */
+            background-color: #fff; /* Màu nền trắng */
+            border-radius: 8px; /* Bo góc */
+            margin: 20px; /* Khoảng cách bên ngoài */
+        }
+
+        /* Cột thông tin bên phải */
+        dt {
+            font-weight: bold; /* Chữ đậm */
+            color: #444; /* Màu chữ */
+            white-space: nowrap; /* Tránh xuống dòng */
+            align-self: center; /* Căn giữa theo trục dọc */
+            text-align: right; /* Căn phải để tạo khoảng cách giữa dt và dd */
+            padding-right: 10px; /* Khoảng cách bên phải */
+        }
+
+        /* Cột thông tin bên trái */
+        dd {
+            color: #555; /* Màu chữ */
+            margin-bottom: 0; /* Không có khoảng cách dưới */
+            align-self: center; /* Căn giữa theo trục dọc */
+        }
+
+        /* Định dạng nút xác nhận xóa */
+        .btn-danger {
+            background-color: #e3342f; /* Màu nền */
+            border: none; /* Không có viền */
+            padding: 12px 20px; /* Khoảng cách bên trong */
+            color: white; /* Màu chữ */
+            font-size: 16px; /* Kích thước chữ */
+            border-radius: 5px; /* Bo góc */
+            cursor: pointer; /* Hiệu ứng con trỏ */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi */
+        }
+
+            /* Hiệu ứng khi di chuột vào nút xác nhận xóa */
+            .btn-danger:hover {
+                background-color: #c82333; /* Màu nền khi hover */
+                transform: scale(1.05); /* Phóng to một chút */
+            }
+
+        /* Định dạng nút quay lại */
+        .back {
+            display: inline-block; /* Hiển thị dạng khối nội tuyến */
+            padding: 10px 15px; /* Khoảng cách bên trong */
+            background-color: #6c757d; /* Màu nền */
+            color: white; /* Màu chữ */
+            border-radius: 5px; /* Bo góc */
+            text-decoration: none; /* Không gạch chân */
+            margin-top: 15px; /* Khoảng cách trên */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi */
+        }
+
+            /* Hiệu ứng khi di chuột vào nút quay lại */
+            .back:hover {
+                background-color: #5a6268; /* Màu nền khi hover */
+                transform: scale(1.05); /* Phóng to một chút */
+                color: white; /* Màu chữ */
+            }
+
+        /* Căn giữa cho nút xác nhận */
+        .submit {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa */
+            margin-top: 20px; /* Khoảng cách trên */
+        }
+
+        /* Căn giữa cho nút xác nhận */
+        .submit_center {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa */
+        }
+
+    </style>
+}
+
+
+<div class="total">
+    <div class="form_del">
+        <h1 style="text-align: center; text-shadow: 3px 3px 3px #ababab;"><b>XÓA THÔNG TIN NGƯỜI HỌC GDTC</b></h1>
+
+        <h3>Đồng chí có muốn xóa thông tin  này không?</h3>
+
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KetQuaHocTap)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KetQuaHocTap)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TieuChuanDanhGiaXepLoaiTheLuc)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TieuChuanDanhGiaXepLoaiTheLuc)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
+            </dd>
+        </dl>
+        <div class="submit_center">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdThongTinNguoiHocGdtc" />
+                <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+
+            </form>
+        </div>
+        <a asp-action="Index" class="back"><i class="fa-solid fa-backward"></i> Trở về</a>
+    </div>
+</div>
+

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHocVien>
+
+@{
+    ViewData["Title"] = "Index";
+    var CtrDaotao = ViewData["ctrDaoTao"];
+    var LoaiDaoTao = ViewData["loaiDaoTao"];
+    var ttDaoTao = ViewData["ttDaoTao"];
+}
+
+<div class="d-flex justify-content-between align-items-center w-100">
+    <div>
+        <h2>Biểu đồ chương trình đào tạo</h2>
+        <canvas id="pieChartDisable"></canvas>
+    </div>
+    <div>
+        <h2>Biểu đồ loại đào tạo</h2>
+        <canvas id="loaiChart"></canvas>
+    </div>
+    <div>
+        <h2>Biểu đồ trạng thái học</h2>
+        <canvas id="statusChart"></canvas>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        #pieChartDisable,
+        #loaiChart,
+        #statusChart {
+            width: 300px !important;
+            height: 300px !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/assets/js/chart.js"></script>
+    <script>
+        // Ctr Dao Tao chart
+        var ctrDaoTaoData = @Html.Raw(Json.Serialize(CtrDaotao));
+        var Labels = ctrDaoTaoData.map(function(item) {
+            return item.ctrDaoTao;
+        });
+        var Data = ctrDaoTaoData.map(function(item) {
+            return item.count;
+        });
+        createPieChart('pieChartDisable', Labels,'Disability Count', Data);
+
+        // Loai Dao Tao chart
+        var loaiDaoTaoData = @Html.Raw(Json.Serialize(LoaiDaoTao));
+        var lLabels = loaiDaoTaoData.map(function(item) {
+            return item.loaiDaoTao;
+        });
+        var lData = loaiDaoTaoData.map(function(item) {
+            return item.count;
+        });
+        createPieChart('loaiChart', lLabels,'Disability Count', lData);
+
+        // Trang Thai Dao Tao chart
+        var statusData = @Html.Raw(Json.Serialize(ttDaoTao));
+        var tLabels = statusData.map(function(item) {
+            return item.ttDaoTao;
+        });
+        var tData = statusData.map(function(item) {
+            return item.count;
+        });
+        createPieChart('statusChart', tLabels,'Disability Count', tData);
+
+    </script>
+}

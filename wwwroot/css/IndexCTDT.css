@@ -1,0 +1,33 @@
+﻿body {
+    background-color: rgb(200, 223, 227);
+    /*    position: relative;*/
+}
+
+table {
+    /*    position:absolute;
+    left: 5px;*/
+    font-size: 15px;
+    box-shadow: 12px 10px 6px 1px rgba(0, 0, 0, 0.2), 0px 4px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tieudebang {
+    width: auto;
+    text-align: center;
+    background-color: rgb(124, 182, 191);
+}
+
+.tieude {
+    color: rgb(28, 99, 110);
+    padding-top: 3%;
+    font-size: 80px;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+}
+
+#customers tr:nth-child(even) {
+    background-color: rgb(200, 223, 227);
+}
+
+#customers tr:hover {
+    background-color: rgb(127, 193, 203);
+}

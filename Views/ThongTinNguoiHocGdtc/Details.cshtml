@@ -1,0 +1,51 @@
+﻿@model C500Hemis.Models.TbThongTinNguoiHocGdtc
+
+@{
+    ViewData["Title"] = "Chi tiết";
+}
+
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+}
+
+<h2>THÔNG TIN CHI TIẾT NGƯỜI HỌC GDTC</h2>
+
+<div class="container">
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top:-20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="IdThongTinNguoiHocGdtc" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdThongTinNguoiHocGdtc)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdHocVien" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVien)" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="KetQuaHocTap" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.KetQuaHocTap)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="TieuChuanDanhGiaXepLoaiTheLuc" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.TieuChuanDanhGiaXepLoaiTheLuc)" readonly>
+        </div>
+    </div>
+    <div class="form-group text-center mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.IdThongTinNguoiHocGdtc">
+            <input type="submit" value="Chỉnh sửa" class="btn btn-primary" />
+        </a>
+    </div>
+</div>

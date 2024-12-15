@@ -1,0 +1,137 @@
+﻿@model C500Hemis.Models.TbThongTinViecLamSauTotNghiep
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    h3 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        padding: 30px;
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    dl.row dt, dl.row dd {
+        margin-bottom: 10px;
+    }
+
+    dt {
+        font-weight: bold;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    dd {
+        margin-bottom: 10px;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #dee2e6;
+    }
+
+    form {
+        padding-bottom: 50px;
+    }
+</style>
+<h1>Xóa</h1>
+
+<h3>Bạn có chắc muốn xóa không?</h3>
+<div>
+    <h4>Thông tin việc làm sau tốt nghiệp</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenDonViCapBang)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenDonViCapBang)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonViTuyenDung)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonViTuyenDung)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ThoiGianTuyenDung)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ThoiGianTuyenDung)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MucLuongKhoiDiem)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MucLuongKhoiDiem)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdHinhThucTuyenDungNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdHinhThucTuyenDungNavigation.IdHinhThucTuyenDung)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdViTriViecLamNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdViTriViecLamNavigation.IdViTriViecLam)
+        </dd>
+    </dl>
+    
+    <table>
+        <tr>
+            <td>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="IdThongTinViecLamSauTotNghiep" />
+                    <input type="submit" value="Xóa" class="btn btn-danger" />
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index">
+                    <input type="hidden" asp-for="IdThongTinViecLamSauTotNghiep" />
+                    <input type="submit" value="Về trang chủ" class="btn btn-danger" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHocVien>
+
+@{
+    ViewData["Title"] = "Index";
+    var ttvay = ViewData["ttvay"];
+}
+
+<div class="d-flex justify-content-between align-items-center">
+    <div>
+        <h2>Biểu đồ vay tín dụng</h2>
+        <canvas id="pieChartDisable"></canvas>
+    </div>
+
+</div>
+
+@section Styles {
+    <style>
+        #pieChartDisable {
+            width: 300px !important;
+            height: 300px !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/assets/js/chart.js"></script>
+    <script>
+        // vay tin dung chart
+        var ctrDaoTaoData = @Html.Raw(Json.Serialize(ttvay));
+        var Labels = ctrDaoTaoData.map(function(item) {
+            return item.ttvay;
+        });
+        var Data = ctrDaoTaoData.map(function(item) {
+            return item.count;
+        });
+        createPieChart('pieChartDisable', Labels,'Disability Count', Data);
+
+    </script>
+}

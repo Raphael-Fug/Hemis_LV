@@ -1,0 +1,171 @@
+﻿@model C500Hemis.Models.TbThongTinHocTapNghienCuuSinh
+
+@{
+    ViewData["Title"] = "Delete";
+}
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+
+}
+
+<h2 style="color: red;">Bạn có chắc muốn xóa không?</h2>
+
+
+<div class="container">
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top:-20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="IdHocVien" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.IdNguoiNavigation.name)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdDoiTuongDauVao" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdDoiTuongDauVaoNavigation.DoiTuongDauVao)" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.ChuongTrinhDaoTao)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdLoaiHinhDaoTao" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiHinhDaoTaoNavigation.LoaiHinhDaoTao)" readonly>
+        </div>
+    </div>
+    <div class="col-md-13">
+        <label asp-for="IdSinhVienNam" class="control-label"></label>
+        <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdSinhVienNamNavigation.SinhVienNam)" readonly>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="DaoTaoTuNam" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.DaoTaoTuNam)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DaoTaoDenNam" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.DaoTaoDenNam)" readonly>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="NgayNhapHoc" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayNhapHoc)" readonly>
+
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdTrangThaiHoc" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdTrangThaiHocNavigation.TrangThaiHoc)" readonly>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="NgayChuyenTrangThai" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayChuyenTrangThai)" readonly>
+
+        </div>
+        <div class="col-md-6">
+            <label asp-for="SoQuyetDinhThoiHoc" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoQuyetDinhThoiHoc)" readonly>
+
+        </div>
+    </div>
+
+    <div class="col-md-13">
+        <label asp-for="TenLuanVan" class="control-label"></label>
+        <input type="text" class="form-control" value="@Html.DisplayFor(model => model.TenLuanVan)" readonly>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="NgayBaoVeCapTruong" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayBaoVeCapTruong)" readonly>
+
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NgayBaoVeCapCoSo" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayBaoVeCapCoSo)" readonly>
+
+        </div>
+    </div>
+
+    <div class="col-md-13">
+        <label asp-for="QuyChuanNguoiHuongDan" class="control-label"></label>
+        <input type="text" class="form-control" value="@Html.DisplayFor(model => model.QuyChuanNguoiHuongDan)" readonly>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="IdNguoiHuongDanChinh" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdNguoiHuongDanChinhNavigation.IdNguoiNavigation.name)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdNguoiHuongDanPhu" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdNguoiHuongDanPhuNavigation.IdNguoiNavigation.name)" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="SoQuyetDinhCongNhan" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoQuyetDinhCongNhan)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NgayQuyetDinhCongNhan" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayQuyetDinhCongNhan)" readonly>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayQuyetDinhThanhLapHoiDongBaoVeCapCoSo)" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="SoQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoQuyetDinhThanhLapHoiDongBaoVeCapTruong)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong)" readonly>
+        </div>
+    </div>
+    <div class="col-md-13">
+        <label asp-for="IdLoaiTotNghiep" class="control-label"></label>
+        <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiTotNghiepNavigation.LoaiTotNghiep)" readonly>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="IdThongTinHocTapNghienCuuSinh" />
+                    <div class="form-group">
+                        <input type="submit" value="Xóa" class="btn btn-danger" />
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>

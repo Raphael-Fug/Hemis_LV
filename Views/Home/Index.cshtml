@@ -1,0 +1,392 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Index - Moderna Bootstrap Template</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Moderna
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Updated: Aug 07 2024 with Bootstrap v5.3.3
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body class="index-page">
+
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+            <a href="/Home" class="logo d-flex align-items-center">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <h1 class="sitename">HOME</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li class="dropdown">
+                        <a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc"><span>Khen Thưởng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Bảng khen thưởng</a></li>
+                            <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/HocVien"><span>Học Viên</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/HocVien">Bảng học viên</a></li>
+                            <li><a href="~/HocVien/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/HocVien/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/KyLuatNguoiHoc"><span>Kỷ Luật</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/KyLuatNguoiHoc">Bảng kỷ luật</a></li>
+                            <li><a href="~/KyLuatNguoiHoc/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/KyLuatNguoiHoc/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/NguoiHocVayTinDung"><span>Vay Tín Dụng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/NguoiHocVayTinDung">Bảng người vay</a></li>
+                            <li><a href="~/NguoiHocVayTinDung/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/NguoiHocVayTinDung/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinHocBong"><span>Học Bổng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinHocBong">Bảng học bổng</a></li>
+                            <li><a href="~/ThongTinHocBong/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinHocBong/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinHocTapNghienCuuSinh"><span>NCS</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinHocTapNghienCuuSinh">Bảng NCS</a></li>
+                            <li><a href="~/ThongTinHocTapNghienCuuSinh/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinHocTapNghienCuuSinh/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinNguoiHocGdtc"><span>GDTC</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinNguoiHocGdtc">Bảng GDTC</a></li>
+                            <li><a href="~/ThongTinNguoiHocGdtc/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinNguoiHocGdtc/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinViecLamSauTotNghiep"><span>Việc Làm</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinViecLamSauTotNghiep">Bảng việc làm</a></li>
+                            <li><a href="~/ThongTinViecLamSauTotNghiep/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinViecLamSauTotNghiep/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinViPham"><span>Vi Phạm</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinViPham">Bảng vi phạm</a></li>
+                            <li><a href="~/ThongTinViPham/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinViPham/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="main">
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero section dark-background">
+
+            <!-- <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in"> -->
+
+            <div id="hero-carousel" class="carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+                <div class="container position-relative">
+
+                    <div class="carousel-item active">
+                        <div class="carousel-container">
+                            <h2>Welcome to group 1</h2>
+                            <p>Thông tin số 1</p>
+                            <a href="#about" class="btn-get-started">Read More</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
+
+                    <div class="carousel-item">
+                        <div class="carousel-container">
+                            <h2>Welcome to group 1</h2>
+                            <p>Thông tin số 2</p>
+                            <a href="#about" class="btn-get-started">Read More</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
+
+                    <div class="carousel-item">
+                        <div class="carousel-container">
+                            <h2>Welcome to group 1</h2>
+                            <p>Thông tin số 3</p>
+                            <a href="#about" class="btn-get-started">Read More</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
+
+                    <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                    </a>
+
+                    <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                    </a>
+
+                    <ol class="carousel-indicators"></ol>
+
+                </div>
+
+            </div>
+
+        </section><!-- /Hero Section -->
+        <!-- Featured Services Section -->
+        <section id="featured-services" class="featured-services section">
+
+            <div class="container">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item item-cyan position-relative">
+                            <div class="icon">
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <a href="#" class="stretched-link">
+                                <h3>Thành viên thứ nhất</h3>
+                            </a>
+                            <p>Mô tả thành viên thứ nhất</p>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-item item-orange position-relative">
+                            <div class="icon">
+                                <i class="bi bi-broadcast"></i>
+                            </div>
+                            <a href="#" class="stretched-link">
+                                <h3>Thành viên thứ hai</h3>
+                            </a>
+                            <p>Mô tả thành viên thứ hai</p>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-item item-teal position-relative">
+                            <div class="icon">
+                                <i class="bi bi-easel"></i>
+                            </div>
+                            <a href="#" class="stretched-link">
+                                <h3>Thành viên thứ ba</h3>
+                            </a>
+                            <p>Mô tả thành viên thứ ba</p>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-item item-red position-relative">
+                            <div class="icon">
+                                <i class="bi bi-bounding-box-circles"></i>
+                            </div>
+                            <a href="#" class="stretched-link">
+                                <h3>Thành viên thứ tư</h3>
+                            </a>
+                            <p>Mô tả thành viên thứ tư</p>
+                            <a href="service-details.html" class="stretched-link"></a>
+                        </div>
+                    </div><!-- End Service Item -->
+                </div>
+
+            </div>
+
+        </section><!-- /Featured Services Section -->
+        <!-- About Section -->
+        <section id="about" class="about section light-background">
+
+            <div class="container">
+
+                <div class="row gy-4">
+                    <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
+                        <img src="assets/img/about.jpg" class="img-fluid" alt="">
+                        <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+                    </div>
+                    <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Những điều tốt đẹp của cuộc sống mang lại sự thỏa mãn và hạnh phúc cho cơ thể.</h3>
+                        <p class="fst-italic">
+                            "Đau đớn và niềm vui, chúng ta trải qua những thời gian khó khăn và công việc nặng nhọc."
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check2-all"></i> <span>mô tả 1</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>mô tả 2</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>mô tả 3</span></li>
+                        </ul>
+                        <p>
+                            "Không có công việc nào mà không mang lại lợi ích từ nó. Điều này có thể gây ra sự đau đớn, nhưng không có gì có thể làm cho chúng ta không cảm thấy vui vẻ. Những người không nhận ra điều này sẽ không có sự thừa nhận."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section><!-- /About Section -->
+        <!-- Features Section -->
+        <section id="features" class="features section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Chức năng</h2>
+                <p>??????????????????????????</p>
+            </div><!-- End Section Title -->
+
+            <div class="container">
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+                        <img src="assets/img/features-1.svg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Chức năng 1</h3>
+                        <p class="fst-italic">
+                            mô tả
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check"></i><span>TN 1</span></li>
+                            <li><i class="bi bi-check"></i> <span>TN 2</span></li>
+                            <li><i class="bi bi-check"></i> <span>TN 3</span></li>
+                        </ul>
+                    </div>
+                </div><!-- Features Item -->
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+                        <img src="assets/img/features-2.svg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Chức năng 2</h3>
+                        <p class="fst-italic">
+                            mô tả 1
+                        </p>
+                        <p>
+                            mô tả 2
+                        </p>
+                    </div>
+                </div><!-- Features Item -->
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out">
+                        <img src="assets/img/features-3.svg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7" data-aos="fade-up">
+                        <h3>Chức năng 3</h3>
+                        <p>mô tả</p>
+                        <ul>
+                            <li><i class="bi bi-check"></i> <span>CN 1</span></li>
+                            <li><i class="bi bi-check"></i><span>CN 2</span></li>
+                            <li><i class="bi bi-check"></i> <span>CN 3</span></li>
+                        </ul>
+                    </div>
+                </div><!-- Features Item -->
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out">
+                        <img src="assets/img/features-4.svg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 order-2 order-md-1" data-aos="fade-up">
+                        <h3>Chức năng 4</h3>
+                        <p class="fst-italic">
+                            Mô tả 1
+                        </p>
+                        <p>
+                            Mô tả 2
+                        </p>
+                    </div>
+                </div><!-- Features Item -->
+
+            </div>
+
+        </section><!-- /Features Section -->
+
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+
+
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Raphael</strong> <span>All Rights Reserved</span></p>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you've purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+                Designed by <a href="https://web.facebook.com/trang.tu.9047">Raphael</a>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

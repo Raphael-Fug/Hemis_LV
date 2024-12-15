@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Index - Moderna Bootstrap Template</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="~/assets/img/favicon.png" rel="icon">
+    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="~/assets/css/main.css" rel="stylesheet">
+    @await RenderSectionAsync("Heads", required: false)
+    @await RenderSectionAsync("Styles", required: false)
+
+    <!-- =======================================================
+    * Template Name: Moderna
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Updated: Aug 07 2024 with Bootstrap v5.3.3
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+<body class="index-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="/Home" class="logo d-flex align-items-center">
+                <h1 class="sitename">HOME</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li class="dropdown">
+                        <a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc"><span>Khen Thưởng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Bảng khen thưởng</a></li>
+                            <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/HocVien"><span>Học Viên</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/HocVien">Bảng học viên</a></li>
+                            <li><a href="~/HocVien/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/HocVien/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/KyLuatNguoiHoc"><span>Kỷ Luật</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/KyLuatNguoiHoc">Bảng kỷ luật</a></li>
+                            <li><a href="~/KyLuatNguoiHoc/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/KyLuatNguoiHoc/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/NguoiHocVayTinDung"><span>Vay Tín Dụng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/NguoiHocVayTinDung">Bảng người vay</a></li>
+                            <li><a href="~/NguoiHocVayTinDung/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/NguoiHocVayTinDung/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinHocBong"><span>Học Bổng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinHocBong">Bảng học bổng</a></li>
+                            <li><a href="~/ThongTinHocBong/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinHocBong/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinHocTapNghienCuuSinh"><span>NCS</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinHocTapNghienCuuSinh">Bảng NCS</a></li>
+                            <li><a href="~/ThongTinHocTapNghienCuuSinh/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinHocTapNghienCuuSinh/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinNguoiHocGdtc"><span>GDTC</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinNguoiHocGdtc">Bảng GDTC</a></li>
+                            <li><a href="~/ThongTinNguoiHocGdtc/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinNguoiHocGdtc/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinViecLamSauTotNghiep"><span>Việc Làm</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinViecLamSauTotNghiep">Bảng việc làm</a></li>
+                            <li><a href="~/ThongTinViecLamSauTotNghiep/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinViecLamSauTotNghiep/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/ThongTinViPham"><span>Vi Phạm</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/ThongTinViPham">Bảng vi phạm</a></li>
+                            <li><a href="~/ThongTinViPham/Chart">Các loại biểu đồ</a></li>
+                            <li><a href="~/ThongTinViPham/Create">Tạo mới</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-title dark-background">
+        <div class="container position-relative">
+            <h1>STORY</h1>
+            <p>Học tập là chìa khóa mở cánh cửa của tương lai. Và mỗi kiến thức mới là một bước tiến lớn trên con đường thành công.</p>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="/">Home</a></li>
+                    <li class="current">About</li>
+                </ol>
+            </nav>
+        </div>
+    </div><!-- End Page Title -->
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-start">
+                    &copy; 2024 <strong><span>Raphael</span></strong>. All Rights Reserved
+                </div>
+                <div class="col-lg-6 text-center text-lg-end">
+                    Designed by <a href="https://web.facebook.com/trang.tu.9047">Raphael</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vendor JS Files -->
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/aos/aos.js"></script>
+    <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="~/assets/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

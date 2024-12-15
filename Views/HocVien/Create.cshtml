@@ -1,0 +1,155 @@
+﻿@model C500Hemis.Models.TbHocVien
+
+@{
+    ViewData["Title"] = "Create";
+}
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+
+}
+<h2>THÊM THÔNG TIN HỌC VIÊN</h2>
+
+<div class="container">
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top:-20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdHocVien" class="control-label"></label>
+                <input asp-for="IdHocVien" class="form-control" />
+                <span asp-validation-for="IdHocVien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaHocVien" class="control-label"></label>
+                <input asp-for="MaHocVien" class="form-control" />
+                <span asp-validation-for="MaHocVien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNguoi" class="control-label"></label>
+                <select asp-for="IdNguoi" class ="form-control" asp-items="ViewBag.IdNguoi"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sdt" class="control-label"></label>
+                <input asp-for="Sdt" class="form-control" />
+                <span asp-validation-for="Sdt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoSoBaoHiem" class="control-label"></label>
+                <input asp-for="SoSoBaoHiem" class="form-control" />
+                <span asp-validation-for="SoSoBaoHiem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdLoaiKhuyetTat" class="control-label"></label>
+                <select asp-for="IdLoaiKhuyetTat" class ="form-control" asp-items="ViewBag.IdLoaiKhuyetTat"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTinh" class="control-label"></label>
+                <select asp-for="IdTinh" class ="form-control" asp-items="ViewBag.IdTinh"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdHuyen" class="control-label"></label>
+                <select asp-for="IdHuyen" class ="form-control" asp-items="ViewBag.IdHuyen"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdXa" class="control-label"></label>
+                <select asp-for="IdXa" class ="form-control" asp-items="ViewBag.IdXa"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoiSinh" class="control-label"></label>
+                <input asp-for="NoiSinh" class="form-control" />
+                <span asp-validation-for="NoiSinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QueQuan" class="control-label"></label>
+                <input asp-for="QueQuan" class="form-control" />
+                <span asp-validation-for="QueQuan" class="text-danger"></span>
+            </div>
+        <table>
+            <div class="row justify-content-center">
+                <div class="col-auto text-center">
+                    <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </table>
+        </form>
+    </div>
+</div>
+@*datalist để tìm kiếm trong seclectlist*@
+<script>
+    var select = document.querySelectorAll("select");
+    var data = {};
+    for (var i = 0; i < select.length; ++i) {
+        select[i].hidden = true; // Ẩn thẻ select
+        let cr = {};
+        let idlist = "datalist" + i.toString();
+        let input = document.createElement("input");
+        let datalist = document.createElement("datalist");
+        let options = select[i].options;
+        let validate = document.createElement("span");
+
+        input.placeholder = "Nhập để tìm kiếm..."; // Placeholder
+        input.className = "form-control";
+        input.setAttribute("list", idlist);
+        input.setAttribute("selid", select[i].id);
+        input.value = ""; // Đặt giá trị mặc định là rỗng
+
+        // Sự kiện khi người dùng thay đổi giá trị trong input
+        input.addEventListener("input", function (e) {
+            let selid = e.target.getAttribute("selid");
+            let validate = document.getElementById("Validate_" + selid);
+
+            // Kiểm tra giá trị người dùng nhập vào
+            if (typeof data[selid][e.target.value] !== 'undefined') {
+                document.getElementById(selid).selectedIndex = data[selid][e.target.value];
+                validate.innerHTML = ""; // Xóa thông báo lỗi nếu hợp lệ
+            } else {
+                validate.innerHTML = validate.getAttribute("msg"); // Hiển thị thông báo lỗi
+            }
+        });
+
+        // Tạo danh sách tùy chọn cho datalist
+        for (var j = 0; j < options.length; ++j) {
+            cr[options[j].text] = j; // Lưu giá trị của tùy chọn
+            let option = document.createElement("option");
+            option.value = options[j].text;
+            datalist.appendChild(option);
+        }
+
+        datalist.id = idlist;
+        data[select[i].id] = cr; // Lưu dữ liệu cho từng select
+        validate.className = "text-danger";
+        validate.id = "Validate_" + select[i].id;
+        validate.setAttribute("msg", "Không hợp lệ");
+        select[i].after(input, datalist, validate); // Chèn input, datalist, và validate vào DOM
+    }
+
+
+</script>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+}
+

@@ -1,0 +1,49 @@
+﻿body {
+}
+body {
+    background-image: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff);
+}
+
+h1 {
+    color: rgb(28, 99, 110);
+    padding-top: 35%;
+    font-size: 60px;
+    text-align: left;
+}
+
+.tieude {
+    color: rgb(28, 99, 110);
+    font-size: 30px;
+    text-align: left;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 10%;
+}
+
+.list {
+    display: block;
+    background-color: rgb(166, 218, 226);
+    border-radius: 50px;
+    margin-bottom: 25px;
+}
+
+    .list p {
+        padding-left: 20px;
+    }
+
+.the li {
+    width: 700px;
+    font-size: 35px;
+}
+
+.list:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.the a {
+    text-decoration: none;
+    color: rgb(28, 99, 110);
+}

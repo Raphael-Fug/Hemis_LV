@@ -1,0 +1,167 @@
+﻿@model C500Hemis.Models.TbNguoiHocVayTinDung
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f7f9fc; /* Màu nền nhẹ nhàng */
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #dc3545; /* Màu đỏ cho tiêu đề */
+    }
+
+    h3 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #6c757d; /* Màu chữ xám cho câu hỏi */
+    }
+
+    h4 {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #007bff; /* Màu xanh cho tiêu đề phụ */
+    }
+
+    .form-container {
+        padding: 30px;
+        margin: 0 auto;
+        width: 70%;
+        background-color: #ffffff; /* Nền trắng cho form */
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    }
+
+    dl.row dt, dl.row dd {
+        margin-bottom: 10px;
+    }
+
+    dt {
+        font-weight: bold;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #e9ecef; /* Nền cho label */
+    }
+
+    dd {
+        margin-bottom: 10px;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s; /* Hiệu ứng chuyển động */
+    }
+
+    .btn-danger {
+        background-color: #dc3545; /* Màu nút xóa */
+        border-color: #dc3545;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333; /* Màu khi hover */
+            transform: scale(1.05); /* Tăng kích thước khi hover */
+        }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #dee2e6;
+    }
+
+    form {
+        padding-bottom: 50px;
+    }
+</style>
+
+<div class="form-container">
+    <h1>Xóa</h1>
+    <h3>Bạn có chắc muốn xóa không?</h3>
+    <div>
+        <h4>Người học vay tín dụng</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SoTienDuocVay)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SoTienDuocVay)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TenToChucTinDung)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TenToChucTinDung)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayVay)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayVay)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ThoiHanVay)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ThoiHanVay)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdHocVienNavigation.IdNguoiNavigation.name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TinhTrangVayNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TinhTrangVayNavigation.TuyChon)
+            </dd>
+        </dl>
+
+        <table>
+            <tr>
+                <td>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="IdNguoiHocVayTinDung" />
+                        <input type="submit" value="Xóa" class="btn btn-danger" />
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Index">
+                        <input type="hidden" asp-for="IdNguoiHocVayTinDung" />
+                        <input type="submit" value="Về trang chủ" class="btn btn-danger" />
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

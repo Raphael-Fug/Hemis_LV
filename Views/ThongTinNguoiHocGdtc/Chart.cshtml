@@ -1,0 +1,38 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHocVien>
+
+@{
+    ViewData["Title"] = "Index";
+    var kqHocTap = ViewData["KqHocTap"];
+}
+
+<div class="d-flex flex-column justify-content-center align-items-center w-100">
+    <h1>Biểu đồ kết quả học tập</h1>
+    <canvas id="pieChartDisable"></canvas>
+</div>
+
+@section Styles {
+    <style>
+        #pieChartDisable {
+            width: 400px !important;
+            height: 400px !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/assets/js/chart.js"></script>
+    <script>
+        // Disablility chart
+        var disabilityData = @Html.Raw(Json.Serialize(kqHocTap));
+        var Labels = disabilityData.map(function(item) {
+            return item.kqHocTap;
+        });
+        var Data = disabilityData.map(function(item) {
+            return item.count;
+        });
+        createPieChart('pieChartDisable', Labels,'Disability Count', Data);
+
+
+    </script>
+}

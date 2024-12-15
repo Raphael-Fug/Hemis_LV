@@ -1,0 +1,58 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHocVien>
+
+@{
+    ViewData["Title"] = "Index";
+    var capQD = ViewData["CapQD"];
+    var loaiKyLuat = ViewData["LoaiKyLuat"];
+}
+
+<div class="d-flex justify-content-between align-items-center">
+    <div>
+        <h2>Biểu đồ cấp quyết định</h2>
+        <canvas id="pieChartDisable"></canvas>
+    </div>
+    <div>
+        <h2>Biểu đồ loại kỉ luật</h2>
+        <canvas id="loaiChart"></canvas>
+    </div>
+
+</div>
+
+@section Styles {
+    <style>
+        #pieChartDisable,
+        #loaiChart {
+            width: 300px !important;
+            height: 300px !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/assets/js/chart.js"></script>
+    <script>
+        // Cap QD chart
+        var ctrDaoTaoData = @Html.Raw(Json.Serialize(capQD));
+        var Labels = ctrDaoTaoData.map(function(item) {
+            return item.capQD;
+        });
+        var Data = ctrDaoTaoData.map(function(item) {
+            return item.count;
+        });
+        createPieChart('pieChartDisable', Labels,'Disability Count', Data);
+
+        // Loai Ky Luat chart
+        var loaiDaoTaoData = @Html.Raw(Json.Serialize(loaiKyLuat));
+        var lLabels = loaiDaoTaoData.map(function(item) {
+            return item.loaiKyLuat;
+        });
+        var lData = loaiDaoTaoData.map(function(item) {
+            return item.count;
+        });
+        createPieChart('loaiChart', lLabels,'Disability Count', lData);
+
+       
+
+    </script>
+}

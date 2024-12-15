@@ -1,0 +1,155 @@
+﻿@model C500Hemis.Models.TbNguoiHocVayTinDung
+
+@{
+    ViewData["Title"] = "Tạo Mới Khoản Vay";
+    Dictionary<int, string> idNguoiToName = (Dictionary<int, string>)ViewData["idNguoiToName"];
+}
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+
+} 
+<h2>THÊM KHOẢN VAY</h2>
+<div class="container">
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top:-20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group">
+            <label asp-for="IdNguoiHocVayTinDung" class="form-label">Mã Người Học</label>
+            <input asp-for="IdNguoiHocVayTinDung" class="form-control" />
+            <span asp-validation-for="IdNguoiHocVayTinDung" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdHocVien" class="form-label">Học Viên</label>
+            <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="IdHocVienNavigation" class="control-label"></label>
+            <select asp-for="IdHocVienNavigation" class="form-control">
+                <option value="">-- Chọn học viên --</option>
+                @foreach (var item in idNguoiToName)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+            <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoTienDuocVay" class="form-label">Số Tiền Được Vay</label>
+            <input asp-for="SoTienDuocVay" type="number" min="1" class="form-control" />
+            <span asp-validation-for="SoTienDuocVay" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TenToChucTinDung" class="form-label">Tên Tổ Chức Tín Dụng</label>
+            <input asp-for="TenToChucTinDung" class="form-control" />
+            <span asp-validation-for="TenToChucTinDung" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NgayVay" class="form-label">Ngày Vay</label>
+            <input asp-for="NgayVay" type="date" class="form-control" />
+            <span asp-validation-for="NgayVay" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DiaChi" class="form-label">Địa Chỉ</label>
+            <input asp-for="DiaChi" class="form-control" />
+            <span asp-validation-for="DiaChi" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ThoiHanVay" class="form-label">Thời Hạn Vay (tháng)</label>
+            <input asp-for="ThoiHanVay" type="number" min="1" class="form-control" />
+            <span asp-validation-for="ThoiHanVay" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TinhTrangVay" class="form-label">Tình Trạng Vay</label>
+            <select asp-for="TinhTrangVay" class="form-control" asp-items="ViewBag.IdTuyChon"></select>
+        </div>
+
+        <table>
+            <div class="row justify-content-center">
+                <div class="col-auto text-center">
+                    <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </table>
+    </form>
+</div>
+@*datalist để tìm kiếm trong seclectlist*@
+<script>
+    var select = document.querySelectorAll("select");
+    var data = {};
+    for (var i = 0; i < select.length; ++i) {
+        select[i].hidden = true; // Ẩn thẻ select
+        let cr = {};
+        let idlist = "datalist" + i.toString();
+        let input = document.createElement("input");
+        let datalist = document.createElement("datalist");
+        let options = select[i].options;
+        let validate = document.createElement("span");
+
+        input.placeholder = "Nhập để tìm kiếm..."; // Placeholder
+        input.className = "form-control";
+        input.setAttribute("list", idlist);
+        input.setAttribute("selid", select[i].id);
+        input.value = ""; // Đặt giá trị mặc định là rỗng
+
+        // Sự kiện khi người dùng thay đổi giá trị trong input
+        input.addEventListener("input", function (e) {
+            let selid = e.target.getAttribute("selid");
+            let validate = document.getElementById("Validate_" + selid);
+
+            // Kiểm tra giá trị người dùng nhập vào
+            if (typeof data[selid][e.target.value] !== 'undefined') {
+                document.getElementById(selid).selectedIndex = data[selid][e.target.value];
+                validate.innerHTML = ""; // Xóa thông báo lỗi nếu hợp lệ
+            } else {
+                validate.innerHTML = validate.getAttribute("msg"); // Hiển thị thông báo lỗi
+            }
+        });
+
+        // Tạo danh sách tùy chọn cho datalist
+        for (var j = 0; j < options.length; ++j) {
+            cr[options[j].text] = j; // Lưu giá trị của tùy chọn
+            let option = document.createElement("option");
+            option.value = options[j].text;
+            datalist.appendChild(option);
+        }
+
+        datalist.id = idlist;
+        data[select[i].id] = cr; // Lưu dữ liệu cho từng select
+        validate.className = "text-danger";
+        validate.id = "Validate_" + select[i].id;
+        validate.setAttribute("msg", "Không hợp lệ");
+        select[i].after(input, datalist, validate); // Chèn input, datalist, và validate vào DOM
+    }
+
+
+</script>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+}

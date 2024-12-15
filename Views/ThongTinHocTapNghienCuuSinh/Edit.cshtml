@@ -1,0 +1,262 @@
+﻿@model C500Hemis.Models.TbThongTinHocTapNghienCuuSinh
+
+@{
+    ViewData["Title"] = "Edit";
+    Dictionary<int, string> idNguoiToName = (Dictionary<int, string>)ViewData["idNguoiToName"];
+
+}
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+
+}
+
+<h2>CHỈNH SỬA THÔNG TIN HỌC TẬP NGHIÊN CỨU SINH</h2>
+<div class="container">
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top:-20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="IdThongTinHocTapNghienCuuSinh" class="control-label"></label>
+                <input asp-for="IdThongTinHocTapNghienCuuSinh" class="form-control" />
+                <span asp-validation-for="IdThongTinHocTapNghienCuuSinh" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdHocVien" class="control-label"></label>
+                <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="IdHocVienNavigation" class="control-label"></label>
+                <select asp-for="IdHocVienNavigation" class="form-control">
+                    <option value="">-- Chọn học viên --</option>
+                    @foreach (var item in idNguoiToName)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+                <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="IdDoiTuongDauVao" class="control-label"></label>
+                <select asp-for="IdDoiTuongDauVao" class="form-control" asp-items="ViewBag.IdDoiTuongDauVao"></select>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdSinhVienNam" class="control-label"></label>
+                <select asp-for="IdSinhVienNam" class="form-control" asp-items="ViewBag.IdSinhVienNam"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
+                <select asp-for="IdChuongTrinhDaoTao" class="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao"></select>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdLoaiHinhDaoTao" class="control-label"></label>
+                <select asp-for="IdLoaiHinhDaoTao" class="form-control" asp-items="ViewBag.IdLoaiHinhDaoTao"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="DaoTaoTuNam" class="control-label"></label>
+                <input asp-for="DaoTaoTuNam" class="form-control" />
+                <span asp-validation-for="DaoTaoTuNam" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="DaoTaoDenNam" class="control-label"></label>
+                <input asp-for="DaoTaoDenNam" class="form-control" />
+                <span asp-validation-for="DaoTaoDenNam" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="NgayNhapHoc" class="control-label"></label>
+                <input asp-for="NgayNhapHoc" class="form-control" />
+                <span asp-validation-for="NgayNhapHoc" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdTrangThaiHoc" class="control-label"></label>
+                <select asp-for="IdTrangThaiHoc" class="form-control" asp-items="ViewBag.IdTrangThaiHoc"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="NgayChuyenTrangThai" class="control-label"></label>
+                <input asp-for="NgayChuyenTrangThai" class="form-control" />
+                <span asp-validation-for="NgayChuyenTrangThai" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="SoQuyetDinhThoiHoc" class="control-label"></label>
+                <input asp-for="SoQuyetDinhThoiHoc" class="form-control" />
+                <span asp-validation-for="SoQuyetDinhThoiHoc" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="TenLuanVan" class="control-label"></label>
+                <input asp-for="TenLuanVan" class="form-control" />
+                <span asp-validation-for="TenLuanVan" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdLoaiTotNghiep" class="control-label"></label>
+                <select asp-for="IdLoaiTotNghiep" class="form-control" asp-items="ViewBag.IdLoaiTotNghiep"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="NgayBaoVeCapTruong" class="control-label"></label>
+                <input asp-for="NgayBaoVeCapTruong" class="form-control" />
+                <span asp-validation-for="NgayBaoVeCapTruong" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NgayBaoVeCapCoSo" class="control-label"></label>
+                <input asp-for="NgayBaoVeCapCoSo" class="form-control" />
+                <span asp-validation-for="NgayBaoVeCapCoSo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-13">
+            <label asp-for="QuyChuanNguoiHuongDan" class="control-label"></label>
+            <input asp-for="QuyChuanNguoiHuongDan" class="form-control" />
+            <span asp-validation-for="QuyChuanNguoiHuongDan" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="IdNguoiHuongDanChinhNavigation" class="control-label"></label>
+                <select asp-for="IdNguoiHuongDanChinhNavigation" class="form-control">
+                    <option value="">-- Chọn học viên --</option>
+                    @foreach (var item in idNguoiToName)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+                <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNguoiHuongDanPhuNavigation" class="control-label"></label>
+                <select asp-for="IdNguoiHuongDanPhuNavigation" class="form-control">
+                    <option value="">-- Chọn học viên --</option>
+                    @foreach (var item in idNguoiToName)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+                <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="SoQuyetDinhCongNhan" class="control-label"></label>
+                <input asp-for="SoQuyetDinhCongNhan" class="form-control" />
+                <span asp-validation-for="SoQuyetDinhCongNhan" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NgayQuyetDinhCongNhan" class="control-label"></label>
+                <input asp-for="NgayQuyetDinhCongNhan" class="form-control" />
+                <span asp-validation-for="NgayQuyetDinhCongNhan" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="control-label"></label>
+                <input asp-for="SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="form-control" />
+                <span asp-validation-for="SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="control-label"></label>
+                <input asp-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="form-control" />
+                <span asp-validation-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapCoSo" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="SoQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="control-label"></label>
+                <input asp-for="SoQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="form-control" />
+                <span asp-validation-for="SoQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="control-label"></label>
+                <input asp-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="form-control" />
+                <span asp-validation-for="NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong" class="text-danger"></span>
+            </div>
+        </div>
+        <table>
+            <div class="row justify-content-center">
+                <div class="col-auto text-center">
+                    <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </table>
+    </form>
+</div>
+
+
+@*datalist để tìm kiếm trong seclectlist*@
+<script>
+    var select = document.querySelectorAll("select");
+    var data = {};
+    for (var i = 0; i < select.length; ++i) {
+        select[i].hidden = true;
+        let cr = {};
+        let idlist = "datalist" + i.toString();
+        let input = document.createElement("input");
+        let datalist = document.createElement("datalist");
+        let options = select[i].options;
+        let validate = document.createElement("span");
+        input.placeholder = "Nhập để tìm kiếm...";
+        input.className = "form-control";
+        input.setAttribute("list", idlist);
+        input.setAttribute("selid", select[i].id);
+        input.value = select[i].options[select[i].selectedIndex].text;
+        input.addEventListener("change", function (e) {
+            let selid = e.target.getAttribute("selid");
+            let validate = document.getElementById("Validate_" + selid);
+            if (typeof data[selid][e.target.value] !== 'undefined') {
+                document.getElementById(selid).selectedIndex = data[selid][e.target.value];
+                validate.innerHTML = "";
+            } else {
+                validate.innerHTML = validate.getAttribute("msg");
+            }
+        });
+        for (var j = 0; j < options.length; ++j) {
+            cr[options[j].text] = j;
+            let option = document.createElement("option");
+            option.value = options[j].text;
+            datalist.appendChild(option);
+        }
+        datalist.id = idlist;
+        data[select[i].id] = cr;
+        validate.className = "text-danger";
+        validate.id = "Validate_" + select[i].id;
+        validate.setAttribute("msg", "Không hợp lệ");
+        select[i].after(input, datalist, validate);
+    }
+</script>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+}

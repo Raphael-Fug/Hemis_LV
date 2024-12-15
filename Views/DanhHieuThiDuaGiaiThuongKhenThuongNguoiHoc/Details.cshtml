@@ -1,0 +1,73 @@
+﻿@model C500Hemis.Models.TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc
+
+@{
+    ViewData["Title"] = "CHI TIẾT";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+}
+
+<h2>THÔNG TIN CHI TIẾT</h2>
+
+<div class="container">
+    <!-- Nút quay lại trang chính -->
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top: -20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="SoQuyetDinhKhenThuong" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NamKhenThuong" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NamKhenThuong)" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="IdCapKhenThuongNavigation" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdCapKhenThuongNavigation.CapKhenThuong)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdDanhHieuThiDuaGiaiThuongKhenThuongNavigation" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongNavigation.ThiDuaGiaiThuongKhenThuong)" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="IdHocVienNavigation" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.LoaiDanhHieuThiDuaGiaiThuongKhenThuong)" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="IdPhuongThucKhenThuongNavigation" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.PhuongThucKhenThuong)" readonly>
+        </div>
+    </div>
+
+    <div class="form-group text-center mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc" class="btn btn-primary">Chỉnh sửa</a>
+    </div>
+</div>

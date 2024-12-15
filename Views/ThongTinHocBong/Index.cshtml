@@ -1,0 +1,212 @@
+﻿@model IEnumerable<C500Hemis.Models.TbThongTinHocBong>
+
+@{
+    ViewData["Title"] = "Index";
+    var excelError = ViewData["Error"];
+    Dictionary<int, string> idNguoiToName = (Dictionary<int, string>)ViewData["idNguoiToName"];
+}
+<html lang="vi">
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap5.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+}
+
+<h1>THÔNG TIN HỌC BỔNG</h1>
+<div class="w">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Create Button -->
+        <a asp-action="Create" style="margin-right: 20px; min-width: 100px" class="btn btn-create">
+            Tạo Mới <i class="fa-solid fa-plus"></i>
+        </a>
+
+        <!-- Import Form -->
+        <form asp-action="ImportExcel" method="post" enctype="multipart/form-data" style="display: flex; height: 30px; align-items: center">
+            <label for="file" class="form-label" style="margin: 0">Chọn File Excel: </label>
+            <input type="file" name="file" class="form-control" style="width: 240px; margin-left: 8px" />
+            <button type="submit" data-bs-dismiss="toast" class="btn btn-primary" style="width: 80px; margin: 0">Import</button>
+        </form>
+    </div>
+
+    <table class="table table-hover" id="example">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>@Html.DisplayNameFor(model => model.TenHocBong)</th>
+                <th>@Html.DisplayNameFor(model => model.DonViTaiTro)</th>
+                <th>@Html.DisplayNameFor(model => model.ThoiGianTraoTangHocBong)</th>
+                <th>@Html.DisplayNameFor(model => model.GiaTriHocBong)</th>
+                <th>@Html.DisplayNameFor(model => model.IdLoaiHocBongNavigation)</th>
+                <th class="nosort">Tùy chọn</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 0;
+            }
+            @if (ViewBag.Message == "File is Invalid")
+            {
+                <div id="toastexcel" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Lỗi</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        File không hợp lệ
+                    </div>
+                </div>
+            }
+            else if (ViewBag.Message == "Import Successfully")
+            {
+                <div id="toastexcel" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Thông báo</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Nhập file excel thành công
+                    </div>
+                </div>
+            }
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>
+                        @if (item.IdHocVienNavigation.IdNguoi != null)
+                            @Html.DisplayFor(modelItem => idNguoiToName[item.IdHocVienNavigation.IdNguoi ?? 0])
+
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.IdHocVienNavigation.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenHocBong)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DonViTaiTro)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ThoiGianTraoTangHocBong)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GiaTriHocBong)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdLoaiHocBongNavigation.LoaiHocBong)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdThongTinHocBong" class="btn" data-bs-toggle="tooltip" title="Chỉnh sửa">
+                            <div class="icon-container">
+                                <i class="fa-regular fa-pen-to-square" style="color: #7dd9bd;"></i>
+                            </div>
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.IdThongTinHocBong" class="btn" data-bs-toggle="tooltip" title="Chi tiết">
+                            <div class="icon-container">
+                                <i class="fa-solid fa-circle-info" style="color: #e5b8e4;"></i>
+                            </div>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.IdThongTinHocBong" class="btn" data-bs-toggle="tooltip" title="Xóa">
+                            <div class="icon-container">
+                                <i class="fa-solid fa-trash" style="color: #f46262;"></i>
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Styles {
+    <style>
+        #toastexcel {
+            position: absolute;
+            top: 70px;
+            right: 24px;
+            z-index: 10000;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Check if there is a toast message
+            if (@excelError != null) {
+                var toastMessage = @excelError;
+                var toastType = @excelError;
+
+                // Set toast content and style
+                $('#toastBody').text(toastMessage);
+                $('#toastMessage').removeClass('bg-success bg-danger').addClass('bg-' + toastType);
+
+                // Show the toast
+                var toast = new bootstrap.Toast($('#toastexcel')[0]);
+                toast.show();
+            }
+        });
+    </script>
+    <script>
+        // Initialize DataTable
+        new DataTable('#example', {
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Vietnamese.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    title: 'THÔNG TIN HỌC BỔNG',
+                    filename: 'THÔNG TIN HỌC BỔNG',
+                    exportOptions: {
+                        columns: ':not(.nosort)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    title: 'THÔNG TIN HỌC BỔNG',
+                    filename: 'THÔNG TIN HỌC BỔNG',
+                    exportOptions: {
+                        columns: ':not(.nosort)'
+                    }
+                },
+                {
+                    extend: 'csv',
+                    text: '<i class="fas fa-file-csv"></i> CSV',
+                    title: 'THÔNG TIN HỌC BỔNG',
+                    filename: 'THÔNG TIN HỌC BỔNG',
+                    exportOptions: {
+                        columns: ':not(.nosort)'
+                    }
+                }
+            ],
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "scrollX": true,
+            fixedColumns: {
+                leftColumns: 2,
+                rightColumns: 1
+            }
+        });
+
+        // Initialize Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+}

@@ -1,0 +1,77 @@
+﻿@model C500Hemis.Models.TbNguoiHocVayTinDung
+
+@{
+    ViewData["Title"] = "CHI TIẾT";
+}
+
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+}
+
+<h2>THÔNG TIN CHI TIẾT</h2>
+
+<div class="container">
+    <!-- Nút quay lại trang chính -->
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top: -20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
+
+    <!-- Thông tin chi tiết vay tín dụng -->
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="SoTienDuocVay" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoTienDuocVay)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="TenToChucTinDung" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.TenToChucTinDung)" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="NgayVay" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayVay)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DiaChi" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.DiaChi)" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="ThoiHanVay" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.ThoiHanVay)" readonly>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="IdHocVienNavigation" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.Email)" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="TinhTrangVayNavigation" class="control-label"></label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.TinhTrangVayNavigation.TuyChon)" readonly>
+        </div>
+    </div>
+
+    <!-- Nút chỉnh sửa -->
+    <div class="form-group text-center mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.IdNguoiHocVayTinDung" class="btn btn-primary">
+            Chỉnh sửa
+        </a>
+    </div>
+</div>

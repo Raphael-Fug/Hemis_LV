@@ -1,0 +1,185 @@
+﻿@model C500Hemis.Models.TbKyLuatNguoiHoc
+
+@{
+    ViewData["Title"] = "XÓA HỒ SƠ";
+}
+@section Styles {
+    <style>
+        body {
+            background-image: url("https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/cach-thiet-ke-background-dep-2.jpg");
+        }
+
+        /* Thiết lập cho khối chứa form */
+        .total {
+            display: flex; /* Sử dụng Flexbox để sắp xếp phần tử */
+            justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+            margin-top: 50px; /* Khoảng cách phía trên */
+            margin-bottom: 50px; /* Khoảng cách phía dưới */
+        }
+
+        /* Định dạng cho form xoá */
+        .form_del {
+            background-color: #f9f9f9; /* Màu nền cho form */
+            padding: 20px; /* Khoảng cách bên trong form */
+            border-radius: 10px; /* Bo góc cho form */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Tạo hiệu ứng bóng cho form */
+            width: 50%; /* Chiều rộng 50% của phần tử cha */
+        }
+
+        /* Định dạng cho tiêu đề chính */
+        h1 {
+            font-size: 36px; /* Kích thước chữ cho tiêu đề */
+            text-align: center; /* Căn giữa tiêu đề */
+            color: #e3342f; /* Đổi màu cho tiêu đề thành màu cảnh báo */
+            margin-bottom: 20px; /* Khoảng cách phía dưới tiêu đề */
+        }
+
+        /* Định dạng cho tiêu đề phụ */
+        h3 {
+            text-align: center; /* Căn giữa tiêu đề phụ */
+            font-size: 24px; /* Kích thước chữ cho tiêu đề phụ */
+            color: #333; /* Màu chữ cho tiêu đề phụ */
+            margin-bottom: 20px; /* Khoảng cách phía dưới tiêu đề phụ */
+        }
+
+        /* Định dạng cho bảng thông tin (ô nhỏ bên trong) */
+        .row {
+            display: grid; /* Sử dụng Grid Layout để sắp xếp các phần tử */
+            grid-template-columns: 50% 50%; /* Mỗi cột chiếm 50% chiều rộng */
+            gap: 10px; /* Khoảng cách giữa các phần tử trong hàng */
+            padding: 15px; /* Khoảng cách bên trong bảng */
+            background-color: #fff;
+            border-radius: 8px; /* Bo góc cho bảng thông tin */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Tạo hiệu ứng bóng cho bảng thông tin */
+            margin: 20px; /* Khoảng cách bên ngoài bảng thông tin */
+        }
+
+        /* Định dạng cho thẻ định nghĩa (dt) */
+        dt {
+            font-weight: bold;
+            color: #444;
+            white-space: nowrap; /* Ngăn không cho xuống dòng */
+            align-self: center; /* Căn giữa theo trục dọc trong Grid Layout */
+            text-align: right; /* Căn phải thẻ định nghĩa để khoảng cách với thẻ dd đều đặn hơn */
+            padding-right: 10px; /* Thêm khoảng cách bên phải giữa dt và dd */
+        }
+
+        /* Định dạng cho thẻ định nghĩa (dd) */
+        dd {
+            color: #555;
+            margin-bottom: 0; /* Không có khoảng cách phía dưới */
+            align-self: center; /* Căn giữa theo trục dọc trong Grid Layout */
+        }
+
+        /* Định dạng cho nút xác nhận xóa */
+        .btn-danger {
+            background-color: #e3342f;
+            border: none; /* Không có đường viền */
+            padding: 12px 20px; /* Khoảng cách bên trong nút */
+            color: white; /* Màu chữ cho nút */
+            font-size: 16px; /* Kích thước chữ cho nút */
+            border-radius: 5px; /* Bo góc cho nút */
+            cursor: pointer; /* Thay đổi con trỏ khi hover qua nút */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi di chuột qua nút */
+        }
+
+            /* Định dạng khi di chuột vào nút xóa */
+            .btn-danger:hover {
+                background-color: red;
+                transform: scale(1.05); /* Tăng kích thước nút một chút */
+            }
+
+        /* Định dạng cho nút quay lại */
+        .back {
+            display: inline-block; /* Hiển thị nút như một khối inline */
+            padding: 10px 15px; /* Khoảng cách bên trong nút */
+            background-color: #6c757d;
+            color: white; /* Màu chữ cho nút */
+            border-radius: 5px; /* Bo góc cho nút */
+            text-decoration: none; /* Bỏ gạch chân cho văn bản trong nút */
+            margin-left: 10px; /* Khoảng cách bên trái của nút */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi di chuột qua nút */
+        }
+
+            /* Định dạng khi di chuột vào nút quay lại */
+            .back:hover {
+                background-color: #5a6268; /* Đổi màu nền khi di chuột qua */
+                transform: scale(1.05); /* Tăng kích thước nút một chút */
+            }
+
+        /* Căn giữa khối chứa nút xác nhận */
+        .submit {
+            display: flex; /* Sử dụng Flexbox để căn giữa */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            margin-top: 20px; /* Khoảng cách phía trên */
+        }
+
+        /* Căn giữa khối chứa nút xác nhận khác */
+        .submit_center {
+            display: flex; /* Sử dụng Flexbox để căn giữa */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+        }
+    </style>
+}
+
+<div class="total">
+    <div class="form_del">
+        <h1><b>XÓA HỒ SƠ HỌC VIÊN BỊ KỶ LUẬT</b></h1>
+
+        <h3>Đồng chí có muốn xóa hồ sơ này không?</h3>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LyDo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LyDo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SoQuyetDinh)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SoQuyetDinh)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayQuyetDinh)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayQuyetDinh)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NamBiKyLuat)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NamBiKyLuat)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdCapQuyetDinhNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.IdCapKhenThuong)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdLoaiKyLuatNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
+            </dd>
+        </dl>
+
+        <div class="submit_center">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdKyLuatNguoiHoc" />
+                <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+
+            </form>
+        </div>
+        <a asp-action="Index" class="back">Quay lại</a>
+    </div>
+</div>
