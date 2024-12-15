@@ -77,6 +77,22 @@ namespace C500Hemis.Controllers
         {
             return View();
         }
+        public IActionResult NDD()
+        {
+            return View();
+        }
+        public IActionResult LTA()
+        {
+            return View();
+        }
+        public IActionResult CCH()
+        {
+            return View();
+        }
+        public IActionResult NTD()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
