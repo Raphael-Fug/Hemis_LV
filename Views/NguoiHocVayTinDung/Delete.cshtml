@@ -1,167 +1,79 @@
 ﻿@model C500Hemis.Models.TbNguoiHocVayTinDung
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "XÓA HỒ SƠ";
 }
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+}
 
-<style>
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #f7f9fc; /* Màu nền nhẹ nhàng */
-        padding: 20px;
-    }
+<h2 style="color: red;">Bạn chắc chắn muốn xóa không ?</h2>
 
-    h1 {
-        font-size: 40px;
-        margin-bottom: 20px;
-        text-align: center;
-        color: #dc3545; /* Màu đỏ cho tiêu đề */
-    }
+<div class="container">
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top:-20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
 
-    h3 {
-        text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
-        color: #6c757d; /* Màu chữ xám cho câu hỏi */
-    }
+    <!-- Information display section -->
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Số tiền được vay:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoTienDuocVay)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Tên tổ chức tín dụng:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.TenToChucTinDung)" readonly />
+        </div>
+    </div>
 
-    h4 {
-        text-align: center;
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #007bff; /* Màu xanh cho tiêu đề phụ */
-    }
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Ngày vay:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayVay)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Địa chỉ:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.DiaChi)" readonly />
+        </div>
+    </div>
 
-    .form-container {
-        padding: 30px;
-        margin: 0 auto;
-        width: 70%;
-        background-color: #ffffff; /* Nền trắng cho form */
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
-    }
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Thời hạn vay:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.ThoiHanVay)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Họ tên học viên:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.IdNguoiNavigation.name)" readonly />
+        </div>
+    </div>
 
-    dl.row dt, dl.row dd {
-        margin-bottom: 10px;
-    }
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Tình trạng vay:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.TinhTrangVayNavigation.TuyChon)" readonly />
+        </div>
+    </div>
 
-    dt {
-        font-weight: bold;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-        background-color: #e9ecef; /* Nền cho label */
-    }
-
-    dd {
-        margin-bottom: 10px;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin-top: 10px;
-        margin-right: 10px;
-        border-radius: 5px;
-        text-decoration: none;
-        transition: background-color 0.3s, transform 0.3s; /* Hiệu ứng chuyển động */
-    }
-
-    .btn-danger {
-        background-color: #dc3545; /* Màu nút xóa */
-        border-color: #dc3545;
-    }
-
-        .btn-danger:hover {
-            background-color: #c82333; /* Màu khi hover */
-            transform: scale(1.05); /* Tăng kích thước khi hover */
-        }
-
-    hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #dee2e6;
-    }
-
-    form {
-        padding-bottom: 50px;
-    }
-</style>
-
-<div class="form-container">
-    <h1>Xóa</h1>
-    <h3>Bạn có chắc muốn xóa không?</h3>
-    <div>
-        <h4>Người học vay tín dụng</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.SoTienDuocVay)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.SoTienDuocVay)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TenToChucTinDung)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TenToChucTinDung)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.NgayVay)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.NgayVay)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DiaChi)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DiaChi)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ThoiHanVay)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ThoiHanVay)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdHocVienNavigation.IdNguoiNavigation.name)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TinhTrangVayNavigation)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TinhTrangVayNavigation.TuyChon)
-            </dd>
-        </dl>
-
-        <table>
-            <tr>
-                <td>
-                    <form asp-action="Delete">
-                        <input type="hidden" asp-for="IdNguoiHocVayTinDung" />
-                        <input type="submit" value="Xóa" class="btn btn-danger" />
-                    </form>
-                </td>
-                <td>
-                    <form asp-action="Index">
-                        <input type="hidden" asp-for="IdNguoiHocVayTinDung" />
-                        <input type="submit" value="Về trang chủ" class="btn btn-danger" />
-                    </form>
-                </td>
-            </tr>
-        </table>
+    <!-- Deletion confirmation form -->
+    <div class="d-flex justify-content-center mt-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdNguoiHocVayTinDung" />
+            <div class="form-group">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+            </div>
+        </form>
     </div>
 </div>

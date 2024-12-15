@@ -1,135 +1,79 @@
 ﻿@model C500Hemis.Models.TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "XÓA HỒ SƠ";
 }
-<style>
-    h1 {
-        font-size: 40px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
 
-    h3 {
-        text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <link href="~/css/ThongTinHocTapNghienCuuSinh.css" rel="stylesheet" />
+}
 
-    h4 {
-        text-align: center;
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+<h2 style="color: red;">Bạn chắc chắn muốn xóa không ?</h2>
 
-    .form-container {
-        padding: 30px;
-        margin: 0 auto;
-        width: 70%;
-    }
+<div class="container">
+    <div style="position: relative;">
+        <a asp-action="Index" style="position: absolute; top: 10px; right: 10px; margin-top:-20px;">
+            <div class="icon-container">
+                <i class="fa-solid fa-circle-arrow-left" style="font-size:25px;"></i>
+            </div>
+        </a>
+    </div>
 
-    dl.row dt, dl.row dd {
-        margin-bottom: 10px;
-    }
+    <!-- Information display section -->
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Số quyết định khen thưởng:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Năm khen thưởng:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NamKhenThuong)" readonly />
+        </div>
+    </div>
 
-    dt {
-        font-weight: bold;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Cấp khen thưởng:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdCapKhenThuongNavigation.CapKhenThuong)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Danh hiệu thi đua / Giải thưởng khen thưởng:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongNavigation.ThiDuaGiaiThuongKhenThuong)" readonly />
+        </div>
+    </div>
 
-    dd {
-        margin-bottom: 10px;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Mã học viên:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Loại danh hiệu thi đua / Giải thưởng:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.LoaiDanhHieuThiDuaGiaiThuongKhenThuong)" readonly />
+        </div>
+    </div>
 
-    .btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin-top: 10px;
-        margin-right: 10px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Phương thức khen thưởng:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.PhuongThucKhenThuong)" readonly />
+        </div>
+    </div>
 
-    hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #dee2e6;
-    }
-    form{
-        padding-bottom: 50px;
-    }
-</style>
-<h1>Xóa</h1>
-
-<h3>Bạn có chắc muốn xóa không</h3>
-<div>
-    <h4>Danh hiệu thi đua giải thưởng khen thưởng người học</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCapKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapKhenThuongNavigation.CapKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongNavigation.ThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdHocVienNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.LoaiDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPhuongThucKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.PhuongThucKhenThuong)
-        </dd>
-    </dl>
-    <table>
-        <tr>
-            <td>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> 
-    </form>
-    </td>
-    <td>
-    <form asp-action="Index">
-        <input type="hidden" asp-for="IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc" />
-        <input type="submit" value="Về trang chủ" class="btn btn-danger" /> 
-    </form>
-    </td>
-    </tr>
-    </table>
+    <!-- Deletion confirmation form -->
+    <div class="d-flex justify-content-center mt-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc" />
+            <div class="form-group">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
 </div>
