@@ -1,4 +1,4 @@
-﻿@model C500Hemis.Models.TbKyLuatNguoiHoc
+﻿@model C500Hemis.Models.TbHocVien
 
 @{
     ViewData["Title"] = "XÓA HỒ SƠ";
@@ -30,47 +30,67 @@
     <div class="row">
         <div class="col-md-6">
             <label class="control-label">Lý do:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.LyDo)" readonly />
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.MaHocVien)" readonly />
         </div>
         <div class="col-md-6">
             <label class="control-label">Số quyết định:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoQuyetDinh)" readonly />
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Email)" readonly />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
             <label class="control-label">Ngày quyết định:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NgayQuyetDinh)" readonly />
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Sdt)" readonly />
         </div>
         <div class="col-md-6">
             <label class="control-label">Năm bị kỷ luật:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NamBiKyLuat)" readonly />
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoSoBaoHiem)" readonly />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
             <label class="control-label">Cấp quyết định:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.IdCapKhenThuong)" readonly />
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NoiSinh)" readonly />
         </div>
         <div class="col-md-6">
             <label class="control-label">Mã học viên:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)" readonly />
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.QueQuan)" readonly />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
             <label class="control-label">Loại kỷ luật:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)" readonly />
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHuyenNavigation.IdHuyen)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Mã học viên:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiKhuyetTatNavigation.IdLoaiKhuyetTat)" readonly />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Loại kỷ luật:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdNguoiNavigation.IdNguoi)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Mã học viên:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdTinhNavigation.IdTinh)" readonly />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Loại kỷ luật:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdXaNavigation.IdXa)" readonly />
         </div>
     </div>
 
     <!-- Deletion confirmation form -->
     <div class="d-flex justify-content-center mt-4">
         <form asp-action="Delete">
-            <input type="hidden" asp-for="IdKyLuatNguoiHoc" />
+            <input type="hidden" asp-for="IdHocVien" />
             <div class="form-group">
                 <input type="submit" value="Xóa" class="btn btn-danger" />
             </div>
