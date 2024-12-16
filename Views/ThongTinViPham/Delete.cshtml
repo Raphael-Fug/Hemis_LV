@@ -28,6 +28,16 @@
 
     <!-- Information display section -->
     <div class="row">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">Hình thức xử lý:</label>
+                <input type="text" class="form-control" value="@Html.DisplayFor(model => model.HinhThucXuLy)" readonly />
+            </div>
+            <div class="col-md-6">
+                <label class="control-label">Mã học viên:</label>
+                <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.Email)" readonly />
+            </div>
+        </div>
         <div class="col-md-6">
             <label class="control-label">Thời gian vi phạm:</label>
             <input type="text" class="form-control" value="@Html.DisplayFor(model => model.ThoiGianViPham)" readonly />
@@ -38,16 +48,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <label class="control-label">Hình thức xử lý:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.HinhThucXuLy)" readonly />
-        </div>
-        <div class="col-md-6">
-            <label class="control-label">Mã học viên:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHocVienNavigation.Email)" readonly />
-        </div>
-    </div>
+
 
     @* <div class="row"> *@
     @*     <div class="col-md-6"> *@

@@ -233,13 +233,6 @@
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
             });
-
-            // Xác nhận xóa
-            $('.delete-btn').on('click', function(e) {
-                if (!confirm('Bạn có chắc chắn muốn xóa thông tin vi phạm này không?')) {
-                    e.preventDefault();
-                }
-            });
         });
     </script>
 }

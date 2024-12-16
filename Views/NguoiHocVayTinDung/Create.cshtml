@@ -26,18 +26,7 @@
         </a>
     </div>
     <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-        <div class="form-group">
-            <label asp-for="IdNguoiHocVayTinDung" class="form-label">Mã Người Học</label>
-            <input asp-for="IdNguoiHocVayTinDung" class="form-control" />
-            <span asp-validation-for="IdNguoiHocVayTinDung" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="IdHocVien" class="form-label">Học Viên</label>
-            <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
-        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div> 
         <div class="form-group">
             <label asp-for="IdHocVienNavigation" class="control-label"></label>
             <select asp-for="IdHocVienNavigation" class="form-control">
@@ -49,38 +38,50 @@
             </select>
             <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="SoTienDuocVay" class="form-label">Số Tiền Được Vay</label>
+            <label asp-for="IdNguoiHocVayTinDung" class="control-label">Mã Người Học</label>
+            <input asp-for="IdNguoiHocVayTinDung" class="form-control" />
+            <span asp-validation-for="IdNguoiHocVayTinDung" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdHocVien" class="control-label">Học Viên</label>
+            <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SoTienDuocVay" class="control-label">Số Tiền Được Vay</label>
             <input asp-for="SoTienDuocVay" type="number" min="1" class="form-control" />
             <span asp-validation-for="SoTienDuocVay" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="TenToChucTinDung" class="form-label">Tên Tổ Chức Tín Dụng</label>
+            <label asp-for="TenToChucTinDung" class="control-label">Tên Tổ Chức Tín Dụng</label>
             <input asp-for="TenToChucTinDung" class="form-control" />
             <span asp-validation-for="TenToChucTinDung" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="NgayVay" class="form-label">Ngày Vay</label>
+            <label asp-for="NgayVay" class="control-label">Ngày Vay</label>
             <input asp-for="NgayVay" type="date" class="form-control" />
             <span asp-validation-for="NgayVay" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="DiaChi" class="form-label">Địa Chỉ</label>
+            <label asp-for="DiaChi" class="control-label">Địa Chỉ</label>
             <input asp-for="DiaChi" class="form-control" />
             <span asp-validation-for="DiaChi" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="ThoiHanVay" class="form-label">Thời Hạn Vay (tháng)</label>
+            <label asp-for="ThoiHanVay" class="control-label">Thời Hạn Vay (tháng)</label>
             <input asp-for="ThoiHanVay" type="number" min="1" class="form-control" />
             <span asp-validation-for="ThoiHanVay" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="TinhTrangVay" class="form-label">Tình Trạng Vay</label>
+            <label asp-for="TinhTrangVay" class="control-label">Tình Trạng Vay</label>
             <select asp-for="TinhTrangVay" class="form-control" asp-items="ViewBag.IdTuyChon"></select>
         </div>
 
@@ -110,7 +111,7 @@
         input.placeholder = "Nhập để tìm kiếm..."; // Placeholder
         input.className = "form-control";
         input.setAttribute("list", idlist);
-        input.setAttribute("selid", select[i].id);
+        input.id = "input_" + i; // Tạo ID duy nhất cho input
         input.value = ""; // Đặt giá trị mặc định là rỗng
 
         // Sự kiện khi người dùng thay đổi giá trị trong input
@@ -129,7 +130,7 @@
 
         // Tạo danh sách tùy chọn cho datalist
         for (var j = 0; j < options.length; ++j) {
-            cr[options[j].text] = j; // Lưu giá trị của tùy chọn
+            cr[options[j].value] = j; // Lưu giá trị của tùy chọn
             let option = document.createElement("option");
             option.value = options[j].text;
             datalist.appendChild(option);
@@ -142,9 +143,8 @@
         validate.setAttribute("msg", "Không hợp lệ");
         select[i].after(input, datalist, validate); // Chèn input, datalist, và validate vào DOM
     }
-
-
 </script>
+>
 
 
 @section Scripts {

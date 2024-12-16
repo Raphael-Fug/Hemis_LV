@@ -28,7 +28,18 @@
         </a>
     </div>
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+        <div class="form-group">
+            <label asp-for="IdHocVienNavigation" class="control-label"></label>
+            <select asp-for="IdHocVienNavigation" class="form-control">
+                <option value="">-- Chọn học viên --</option>
+                @foreach (var item in idNguoiToName)
+                {
+                    <option value="@item.Key">@item.Value</option>
+                }
+            </select>
+            <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
+        </div>
             <div class="form-group">
                 <label asp-for="IdThongTinViecLamSauTotNghiep" class="control-label"></label>
                 <input asp-for="IdThongTinViecLamSauTotNghiep" class="form-control" />
@@ -38,17 +49,7 @@
                 <label asp-for="IdHocVien" class="control-label"></label>
                 <select asp-for="IdHocVien" class ="form-control" asp-items="ViewBag.IdHocVien"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="IdHocVienNavigation" class="control-label"></label>
-                <select asp-for="IdHocVienNavigation" class="form-control">
-                    <option value="">-- Chọn học viên --</option>
-                    @foreach (var item in idNguoiToName)
-                    {
-                        <option value="@item.Key">@item.Value</option>
-                    }
-                </select>
-                <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="TenDonViCapBang" class="control-label"></label>
                 <input asp-for="TenDonViCapBang" class="form-control" />

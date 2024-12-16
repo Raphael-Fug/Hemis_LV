@@ -27,18 +27,7 @@
         </a>
     </div>
     <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="row">
-            <div class="col-md-6">
-                <label asp-for="IdThongTinHocTapNghienCuuSinh" class="control-label"></label>
-                <input asp-for="IdThongTinHocTapNghienCuuSinh" class="form-control" />
-                <span asp-validation-for="IdThongTinHocTapNghienCuuSinh" class="text-danger"></span>
-            </div>
-            <div class="col-md-6">
-                <label asp-for="IdHocVien" class="control-label"></label>
-                <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
-            </div>
-        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>       
         <div class="row">
             <div class="form-group">
                 <label asp-for="IdHocVienNavigation" class="control-label"></label>
@@ -52,6 +41,18 @@
                 <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="IdThongTinHocTapNghienCuuSinh" class="control-label"></label>
+                <input asp-for="IdThongTinHocTapNghienCuuSinh" class="form-control" />
+                <span asp-validation-for="IdThongTinHocTapNghienCuuSinh" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdHocVien" class="control-label"></label>
+                <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <label asp-for="IdDoiTuongDauVao" class="control-label"></label>
