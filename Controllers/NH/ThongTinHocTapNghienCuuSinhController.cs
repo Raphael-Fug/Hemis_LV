@@ -280,7 +280,7 @@ namespace C500Hemis.Controllers.CTDT
                 {
                     return NotFound();
                 }
-                var tbThongTinHocTapNghienCuuSinhs = await ApiServices_.GetAll<TbThongTinHocTapNghienCuuSinh>("/api/nh/ThongTinHocTapNghienCuuSinh");
+                var tbThongTinHocTapNghienCuuSinhs = await TbThongTinHocTapNghienCuuSinhs();
                 var tbThongTinHocTapNghienCuuSinh = tbThongTinHocTapNghienCuuSinhs.FirstOrDefault(m => m.IdThongTinHocTapNghienCuuSinh == id);
                 if (tbThongTinHocTapNghienCuuSinh == null)
                 {

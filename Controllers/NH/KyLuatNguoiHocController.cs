@@ -243,7 +243,7 @@ namespace C500Hemis.Controllers.NH
                 {
                     return NotFound();
                 }
-                var tbKyLuatNguoiHocs = await ApiServices_.GetAll<TbKyLuatNguoiHoc>("/api/nh/KyLuatNguoiHoc");
+                var tbKyLuatNguoiHocs = await TbKyLuatNguoiHocs();
                 var tbKyLuatNguoiHoc = tbKyLuatNguoiHocs.FirstOrDefault(m => m.IdKyLuatNguoiHoc == id);
                 if (tbKyLuatNguoiHoc == null)
                 {

@@ -241,7 +241,7 @@ namespace C500Hemis.Controllers.NH
                 {
                     return NotFound();
                 }
-                var tbThongTinViecLamSauTotNghieps = await ApiServices_.GetAll<TbThongTinViecLamSauTotNghiep>("/api/nh/ThongTinViecLamSauTotNghiep");
+                var tbThongTinViecLamSauTotNghieps = await TbThongTinViecLamSauTotNghieps();
                 var tbThongTinViecLamSauTotNghiep = tbThongTinViecLamSauTotNghieps.FirstOrDefault(m => m.IdThongTinViecLamSauTotNghiep == id);
                 if (tbThongTinViecLamSauTotNghiep == null)
                 {

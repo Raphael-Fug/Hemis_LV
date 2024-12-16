@@ -258,7 +258,8 @@ namespace C500Hemis.Controllers.NH
                 {
                     return NotFound();
                 }
-                var tbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHocs = await ApiServices_.GetAll<TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc>("/api/nh/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc");
+                // Tìm các dữ liệu theo Id tương ứng đã truyền vào view Details
+                var tbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHocs = await TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHocs();
                 var tbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc = tbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHocs.FirstOrDefault(m => m.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc == id);
                 if (tbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc == null)
                 {

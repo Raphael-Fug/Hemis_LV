@@ -229,7 +229,7 @@ namespace C500Hemis.Controllers.NH
                 {
                     return NotFound();
                 }
-                var tbThongTinNguoiHocGdtcs = await ApiServices_.GetAll<TbThongTinNguoiHocGdtc>("/api/nh/ThongTinNguoiHocGdtc");
+                var tbThongTinNguoiHocGdtcs = await TbThongTinNguoiHocGdtcs();
                 var tbThongTinNguoiHocGdtc = tbThongTinNguoiHocGdtcs.FirstOrDefault(m => m.IdThongTinNguoiHocGdtc == id);
                 if (tbThongTinNguoiHocGdtc == null)
                 {

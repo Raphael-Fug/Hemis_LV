@@ -29,61 +29,61 @@
     <!-- Information display section -->
     <div class="row">
         <div class="col-md-6">
-            <label class="control-label">Lý do:</label>
+            <label class="control-label">Mã học viên:</label>
             <input type="text" class="form-control" value="@Html.DisplayFor(model => model.MaHocVien)" readonly />
         </div>
         <div class="col-md-6">
-            <label class="control-label">Số quyết định:</label>
+            <label class="control-label">Email:</label>
             <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Email)" readonly />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <label class="control-label">Ngày quyết định:</label>
+            <label class="control-label">Số điện thoại:</label>
             <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Sdt)" readonly />
         </div>
         <div class="col-md-6">
-            <label class="control-label">Năm bị kỷ luật:</label>
+            <label class="control-label">Số bảo hiểm:</label>
             <input type="text" class="form-control" value="@Html.DisplayFor(model => model.SoSoBaoHiem)" readonly />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <label class="control-label">Cấp quyết định:</label>
+            <label class="control-label">Nơi sinh:</label>
             <input type="text" class="form-control" value="@Html.DisplayFor(model => model.NoiSinh)" readonly />
         </div>
         <div class="col-md-6">
-            <label class="control-label">Mã học viên:</label>
+            <label class="control-label">Quê quán:</label>
             <input type="text" class="form-control" value="@Html.DisplayFor(model => model.QueQuan)" readonly />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <label class="control-label">Loại kỷ luật:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHuyenNavigation.IdHuyen)" readonly />
+            <label class="control-label">Huyện:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdHuyenNavigation.TenHuyen)" readonly />
         </div>
         <div class="col-md-6">
-            <label class="control-label">Mã học viên:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiKhuyetTatNavigation.IdLoaiKhuyetTat)" readonly />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label class="control-label">Loại kỷ luật:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdNguoiNavigation.IdNguoi)" readonly />
-        </div>
-        <div class="col-md-6">
-            <label class="control-label">Mã học viên:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdTinhNavigation.IdTinh)" readonly />
+            <label class="control-label">Loại khuyết tật:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdLoaiKhuyetTatNavigation.LoaiKhuyetTat)" readonly />
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <label class="control-label">Loại kỷ luật:</label>
-            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdXaNavigation.IdXa)" readonly />
+            <label class="control-label">Tên:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdNguoiNavigation.name)" readonly />
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Tỉnh:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdTinhNavigation.TenTinh)" readonly />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">Xã:</label>
+            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.IdXaNavigation.TenXa)" readonly />
         </div>
     </div>
 

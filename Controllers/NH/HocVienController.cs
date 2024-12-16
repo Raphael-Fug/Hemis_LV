@@ -236,7 +236,7 @@ namespace C500Hemis.Controllers.NH
                 {
                     return NotFound();
                 }
-                var tbHocViens = await ApiServices_.GetAll<TbHocVien>("/api/nh/HocVien");
+                var tbHocViens = await TbHocViens();
                 var tbHocVien = tbHocViens.FirstOrDefault(m => m.IdHocVien == id);
                 if (tbHocVien == null)
                 {

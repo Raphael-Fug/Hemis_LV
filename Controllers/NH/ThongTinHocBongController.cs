@@ -236,7 +236,7 @@ namespace C500Hemis.Controllers.NH
                 {
                     return NotFound();
                 }
-                var tbThongTinHocBongs = await ApiServices_.GetAll<TbThongTinHocBong>("/api/nh/ThongTinHocBong");
+                var tbThongTinHocBongs = await TbThongTinHocBongs();
                 var tbThongTinHocBong = tbThongTinHocBongs.FirstOrDefault(m => m.IdThongTinHocBong == id);
                 if (tbThongTinHocBong == null)
                 {
