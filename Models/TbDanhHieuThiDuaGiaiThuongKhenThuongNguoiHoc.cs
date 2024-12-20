@@ -9,7 +9,7 @@ namespace C500Hemis.Models;
 
 public partial class TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc
 {
-    [Display(Name = "Danh hiệu thi đua giải thưởng khen thưởng người học")]
+    [Display(Name = "ID Danh hiệu thi đua giải thưởng khen thưởng người học")]
     public int IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc { get; set; }
     [Display(Name = "Học viên")]
     public int? IdHocVien { get; set; }
@@ -20,6 +20,7 @@ public partial class TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc
     [Display(Name = "Số quyết định khen thưởng")]
     public string? SoQuyetDinhKhenThuong { get; set; }
     [Display(Name = "Phương thức khen thưởng")]
+    [Required(ErrorMessage = "Bắt buộc phải nhập năm khen thưởng")]
     public int? IdPhuongThucKhenThuong { get; set; }
     [Display(Name = "Năm khen thưởng")]
     public string? NamKhenThuong { get; set; }

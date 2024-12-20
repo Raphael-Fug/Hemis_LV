@@ -29,8 +29,14 @@
     </div>
         <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+        
+            <div class="form-group">
+                <label asp-for="IdThongTinViecLamSauTotNghiep" class="control-label"></label>
+                <input asp-for="IdThongTinViecLamSauTotNghiep" class="form-control" />
+                <span asp-validation-for="IdThongTinViecLamSauTotNghiep" class="text-danger"></span>
+            </div>
         <div class="form-group">
-            <label asp-for="IdHocVienNavigation" class="control-label"></label>
+            <label asp-for="IdHocVienNavigation" class="control-label">Tên học viên</label>
             <select asp-for="IdHocVienNavigation" class="form-control">
                 <option value="">-- Chọn học viên --</option>
                 @foreach (var item in idNguoiToName)
@@ -41,12 +47,7 @@
             <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
         </div>
             <div class="form-group">
-                <label asp-for="IdThongTinViecLamSauTotNghiep" class="control-label"></label>
-                <input asp-for="IdThongTinViecLamSauTotNghiep" class="form-control" />
-                <span asp-validation-for="IdThongTinViecLamSauTotNghiep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdHocVien" class="control-label"></label>
+                <label asp-for="IdHocVien" class="control-label">Email</label>
                 <select asp-for="IdHocVien" class ="form-control" asp-items="ViewBag.IdHocVien"></select>
             </div>
 

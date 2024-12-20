@@ -29,8 +29,14 @@
         <form asp-action="Create">
 
             <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+        
+            <div class="form-group">
+                <label asp-for="IdThongTinViPham" class="control-label"></label>
+                <input asp-for="IdThongTinViPham" class="form-control" />
+                <span asp-validation-for="IdThongTinViPham" class="text-danger"></span>
+            </div>
         <div class="form-group">
-            <label asp-for="IdHocVienNavigation" class="control-label"></label>
+            <label asp-for="IdHocVienNavigation" class="control-label">Tên học viên</label>
             <select asp-for="IdHocVienNavigation" class="form-control">
                 <option value="">-- Chọn học viên --</option>
                 @foreach (var item in idNguoiToName)
@@ -40,11 +46,6 @@
             </select>
             <span asp-validation-for="IdHocVienNavigation" class="text-danger"></span>
         </div>
-            <div class="form-group">
-                <label asp-for="IdThongTinViPham" class="control-label"></label>
-                <input asp-for="IdThongTinViPham" class="form-control" />
-                <span asp-validation-for="IdThongTinViPham" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="IdHocVien" class="control-label"> Email </label>
                 <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien" size="5"></select>
@@ -65,7 +66,7 @@
                 <input asp-for="HinhThucXuLy" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="IdLoaiViPham" class="control-label"></label>
+                <label asp-for="IdLoaiViPham" class="control-label">Loại vi phạm</label>
                 <select asp-for="IdLoaiViPham" class="form-control" asp-items="ViewBag.IdLoaiViPham"></select>
                 <span asp-validation-for="IdLoaiViPham" class="text-danger"></span>
             </div>

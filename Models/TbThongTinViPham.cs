@@ -8,7 +8,6 @@ namespace C500Hemis.Models;
 public partial class TbThongTinViPham
 {
     [Display(Name = "Id thông tin vi phạm")]
-
     public int IdThongTinViPham { get; set; }
 
     [Display(Name = "Id học viên")]

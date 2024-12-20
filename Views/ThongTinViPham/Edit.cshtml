@@ -32,13 +32,13 @@
         <input type="hidden" asp-for="IdThongTinViPham" />
 
         <div class="form-group">
-            <label asp-for="IdHocVien" class="control-label"></label>
+            <label asp-for="IdHocVien" class="control-label">Email</label>
             <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
             <span asp-validation-for="IdHocVien" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="IdHocVienNavigation" class="control-label"></label>
+            <label asp-for="IdHocVienNavigation" class="control-label">Tên học viên</label>
             <select asp-for="IdHocVienNavigation" class="form-control">
                 <option value="">-- Chọn học viên --</option>
                 @foreach (var item in idNguoiToName)
@@ -68,7 +68,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="IdLoaiViPham" class="control-label"></label>
+            <label asp-for="IdLoaiViPham" class="control-label">Loại vi phạm</label>
             <select asp-for="IdLoaiViPham" class="form-control" asp-items="ViewBag.IdLoaiViPham">
                 <option value="">-- Chọn loại vi phạm --</option>
             </select>
