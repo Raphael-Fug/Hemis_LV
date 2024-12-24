@@ -359,5 +359,28 @@ namespace C500Hemis.Controllers.NH
             }
 
         }
+        //Biểu đổ khác
+        public async Task<IActionResult> OtherChart()
+        {
+            try
+            {
+                List<TbNguoiHocVayTinDung> getall = await TbNguoiHocVayTinDungs();
+                // Lấy data cho biểu đồ khuyết tật
+                var ttvay = getall.GroupBy(g => g.TinhTrangVay == null ? "Không" : g.TinhTrangVayNavigation.TuyChon).Select(s => new
+                {
+                    ttvay = s.Key,
+                    Count = s.Count()
+                }).ToList();
+
+
+                ViewData["ttvay"] = ttvay;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

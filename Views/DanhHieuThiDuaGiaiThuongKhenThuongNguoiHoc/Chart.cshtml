@@ -6,25 +6,6 @@
     var capKhenThuong = ViewData["CapKhenThuong"];
     var ptKhenThuong = ViewData["PhuongThucKhenThuong"];
     var loaiDanhHieu = ViewData["LoaiDanhHieu"];
-
-    // Kiểm tra null cho Model
-    if (Model != null)
-    {
-        var ctn = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chủ tịch nước");
-        var cp = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chính phủ");
-        var bo = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Bộ");
-        var dp = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Địa phương");
-        var ccs = Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Cấp cơ sở");
-    }
-    else
-    {
-        // Gán giá trị mặc định nếu Model là null
-        var ctn = 0;
-        var cp = 0;
-        var bo = 0;
-        var dp = 0;
-        var ccs = 0;
-    }
 }
 
 <div class="container d-flex justify-content-between">
@@ -49,54 +30,6 @@
         Không có dữ liệu để hiển thị
     </div>
 }
-@* else *@
-@* { *@
-@*     <script> *@
-@*         var ctx = document.getElementById('myChart').getContext('2d'); *@
-@*         var myChart = new Chart(ctx, { *@
-@*             type: 'pie', *@
-@*             data: { *@
-@*                 labels: ['Chủ tịch nước', 'Chính phủ', 'Bộ', 'Địa phương', 'Cấp cơ sở'], *@
-@*                 datasets: [{ *@
-@*                     label: 'Số lượng theo cấp khen thưởng', *@
-@*                     data: [@(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chủ tịch nước")), *@
-@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Chính phủ")), *@
-@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Bộ")), *@
-@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Địa phương")), *@
-@*         @(Model.Count(c => c.IdCapKhenThuongNavigation?.CapKhenThuong == "Cấp cơ sở"))], *@
-@*                     backgroundColor: [ *@
-@*                         'rgba(255, 99, 132, 0.2)', *@
-@*                         'rgba(54, 162, 235, 0.2)', *@
-@*                         'rgba(255, 206, 86, 0.2)', *@
-@*                         'rgba(75, 192, 192, 0.2)', *@
-@*                         'rgba(153, 102, 255, 0.2)' *@
-@*                     ], *@
-@*                     borderColor: [ *@
-@*                         'rgba(255, 99, 132, 1)', *@
-@*                         'rgba(54, 162, 235, 1)', *@
-@*                         'rgba(255, 206, 86, 1)', *@
-@*                         'rgba(75, 192, 192, 1)', *@
-@*                         'rgba(153, 102, 255, 1)' *@
-@*                     ], *@
-@*                     borderWidth: 1 *@
-@*                 }] *@
-@*             }, *@
-@*             options: { *@
-@*                 responsive: true, *@
-@*                 plugins: { *@
-@*                     legend: { *@
-@*                         position: 'top', *@
-@*                     }, *@
-@*                     title: { *@
-@*                         display: true, *@
-@*                         text: 'Biểu đồ phân bố cấp khen thưởng' *@
-@*                     } *@
-@*                 } *@
-@*             } *@
-@*         }); *@
-@*     </script> *@
-@* } *@
-
 
 @section Styles {
     <style>

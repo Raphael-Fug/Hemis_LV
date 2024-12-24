@@ -1,0 +1,182 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHocVien>
+
+@{
+    ViewData["Title"] = "Thống kê học bổng";
+    var loaiHocBong = ViewData["LoaiHocBong"];
+}
+
+<div class="container-fluid py-3">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Thống kê loại học bổng</h5>
+                    <div class="d-flex gap-2">
+                        <select class="form-select form-select-sm" id="chartType" style="width: 130px">
+                            <option value="pie">Biểu đồ tròn</option>
+                            <option value="doughnut">Biểu đồ vòng</option>
+                            <option value="bar">Biểu đồ cột</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="pieChartDisable"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            box-shadow: 0 2px 4px rgba(0,0,0,.08);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-select-sm {
+            font-size: 0.875rem;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chart = null;
+
+        function createChart(type, labels, data) {
+            const ctx = document.getElementById('pieChartDisable').getContext('2d');
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            const config = {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)',
+                            'rgba(201, 203, 207, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(201, 203, 207, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                },
+                                generateLabels: function(chart) {
+                                    const datasets = chart.data.datasets;
+                                    const labels = chart.data.labels;
+                                    const total = datasets[0].data.reduce((a, b) => a + b, 0);
+
+                                    return labels.map((label, i) => ({
+                                        text: `${label} (${datasets[0].data[i]} sinh viên - ${Math.round(datasets[0].data[i]/total*100)}%)`,
+                                        fillStyle: datasets[0].backgroundColor[i],
+                                        hidden: false,
+                                        lineCap: 'butt',
+                                        lineDash: [],
+                                        lineDashOffset: 0,
+                                        lineJoin: 'miter',
+                                        lineWidth: 1,
+                                        strokeStyle: datasets[0].borderColor[i],
+                                        pointStyle: 'circle',
+                                        rotation: 0
+                                    }));
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.raw;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${context.label}: ${value} sinh viên (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            display: type === 'bar',
+                            beginAtZero: true,
+                            ticks: {
+                                font: { size: 11 }
+                            }
+                        },
+                        x: {
+                            display: type === 'bar',
+                            ticks: {
+                                font: { size: 11 }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 500
+                    }
+                }
+            };
+
+            chart = new Chart(ctx, config);
+        }
+
+        // Khởi tạo dữ liệu và biểu đồ
+        document.addEventListener('DOMContentLoaded', function() {
+            const hocBongData = @Html.Raw(Json.Serialize(loaiHocBong));
+            const labels = hocBongData.map(item => item.tenHocBong);
+            const data = hocBongData.map(item => item.count);
+
+            // Khởi tạo biểu đồ ban đầu
+            createChart('pie', labels, data);
+
+            // Xử lý sự kiện thay đổi loại biểu đồ
+            document.getElementById('chartType').addEventListener('change', function(e) {
+                createChart(e.target.value, labels, data);
+            });
+        });
+    </script>
+}

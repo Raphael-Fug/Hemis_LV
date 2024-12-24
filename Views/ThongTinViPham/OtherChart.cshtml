@@ -1,0 +1,201 @@
+﻿@model IEnumerable<C500Hemis.Models.TbThongTinViPham>
+
+@{
+    ViewData["Title"] = "Thống kê vi phạm";
+    var loaiViPham = ViewData["LoaiViPham"];
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-10">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-chart-pie text-primary me-2"></i>
+                        <h5 class="card-title mb-0">Thống kê vi phạm theo loại</h5>
+                    </div>
+                    <div class="d-flex gap-3 align-items-center">
+                        <select class="form-select form-select-sm" id="chartType" style="min-width: 150px;">
+                            <option value="pie">Biểu đồ tròn</option>
+                            <option value="bar">Biểu đồ cột</option>
+                            <option value="line">Biểu đồ đường</option>
+                            <option value="area">Biểu đồ vùng</option>
+                            <option value="doughnut">Biểu đồ vòng</option>
+                            <option value="polarArea">Biểu đồ cực</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            border-bottom: 1px solid rgba(0,0,0,.05);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            color: #344767;
+            font-weight: 600;
+        }
+
+        .form-select {
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            padding: 0.3rem 2rem 0.3rem 0.75rem;
+            font-size: 0.875rem;
+            color: #344767;
+            background-color: #fff;
+        }
+
+            .form-select:focus {
+                border-color: #86b7fe;
+                outline: 0;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let currentChart = null;
+
+        const backgroundColors = [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)',
+            'rgba(255, 159, 64, 0.8)',
+            'rgba(201, 203, 207, 0.8)',
+            'rgba(255, 99, 255, 0.8)'
+        ];
+
+        const borderColors = backgroundColors.map(color => color.replace('0.8', '1'));
+
+        const chartData = @Html.Raw(Json.Serialize(loaiViPham));
+        const labels = chartData.map(item => item.loaiViPham);
+        const data = chartData.map(item => item.count);
+
+        function createChart(type) {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const total = data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${context.label}: ${value} lượt (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuart'
+                }
+            };
+
+            let chartConfig = {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số lượng vi phạm',
+                        data: data,
+                        backgroundColor: type === 'line' ? borderColors[1] : backgroundColors,
+                        borderColor: type === 'line' ? borderColors[1] : borderColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: commonOptions
+            };
+
+            if (type === 'line' || type === 'area') {
+                chartConfig.data.datasets[0].fill = type === 'area';
+                chartConfig.data.datasets[0].tension = 0.3;
+                chartConfig.options.scales = {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                };
+            }
+            else if (type === 'bar') {
+                chartConfig.options.scales = {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                };
+                chartConfig.options.plugins.tooltip.callbacks.label = function(context) {
+                    return `Số lượng: ${context.raw}`;
+                };
+            }
+
+            currentChart = new Chart(ctx, chartConfig);
+        }
+
+        document.getElementById('chartType').addEventListener('change', function(e) {
+            createChart(e.target.value);
+        });
+
+        // Khởi tạo biểu đồ mặc định
+        createChart('pie');
+
+        // Xử lý responsive
+        window.addEventListener('resize', function() {
+            if (currentChart) {
+                currentChart.resize();
+            }
+        });
+    </script>
+}

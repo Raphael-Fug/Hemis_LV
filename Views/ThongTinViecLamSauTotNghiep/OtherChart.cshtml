@@ -1,0 +1,223 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHocVien>
+
+@{
+    ViewData["Title"] = "Thống kê tuyển dụng và việc làm";
+    var htTD = ViewData["htTD"];
+    var vtriVL = ViewData["vtriVL"];
+}
+
+<div class="container-fluid py-3">
+    <div class="row">
+        <!-- Hình thức tuyển dụng -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Thống kê hình thức tuyển dụng</h5>
+                    <div class="d-flex gap-3 align-items-center">
+                        <select class="form-select form-select-sm chart-type" data-chart="htTDChart" style="width: 130px">
+                            <option value="pie">Biểu đồ tròn</option>
+                            <option value="doughnut">Biểu đồ vòng</option>
+                            <option value="bar">Biểu đồ cột</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="htTDChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vị trí việc làm -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Thống kê vị trí việc làm</h5>
+                    <div class="d-flex gap-3 align-items-center">
+                        <select class="form-select form-select-sm chart-type" data-chart="vtriVLChart" style="width: 130px">
+                            <option value="pie">Biểu đồ tròn</option>
+                            <option value="doughnut">Biểu đồ vòng</option>
+                            <option value="bar">Biểu đồ cột</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="vtriVLChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            box-shadow: 0 2px 4px rgba(0,0,0,.08);
+            margin-bottom: 1rem;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+            padding: 0.75rem 1rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .form-select-sm {
+            font-size: 0.875rem;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const charts = {};
+        const colors = {
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)',
+                'rgba(255, 159, 64, 0.7)',
+                'rgba(201, 203, 207, 0.7)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(201, 203, 207, 1)'
+            ]
+        };
+
+        function createChart(canvasId, type, labels, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+
+            charts[canvasId] = new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors.backgroundColor,
+                        borderColor: colors.borderColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: { size: 11 },
+                                generateLabels: function(chart) {
+                                    const datasets = chart.data.datasets;
+                                    const labels = chart.data.labels;
+                                    const total = datasets[0].data.reduce((a, b) => a + b, 0);
+
+                                    return labels.map((label, i) => ({
+                                        text: `${label} (${datasets[0].data[i]} - ${Math.round(datasets[0].data[i]/total*100)}%)`,
+                                        fillStyle: datasets[0].backgroundColor[i],
+                                        hidden: false,
+                                        lineCap: 'butt',
+                                        lineDash: [],
+                                        lineDashOffset: 0,
+                                        lineJoin: 'miter',
+                                        lineWidth: 1,
+                                        strokeStyle: datasets[0].borderColor[i],
+                                        pointStyle: 'circle',
+                                    }));
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.raw;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${context.label}: ${value} người (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            display: type === 'bar',
+                            beginAtZero: true,
+                            ticks: { font: { size: 11 } }
+                        },
+                        x: {
+                            display: type === 'bar',
+                            ticks: { font: { size: 11 } }
+                        }
+                    },
+                    animation: {
+                        duration: 500
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dữ liệu hình thức tuyển dụng
+            const htTDData = @Html.Raw(Json.Serialize(htTD));
+            const htTDLabels = htTDData.map(item => item.htTD);
+            const htTDValues = htTDData.map(item => item.count);
+            createChart('htTDChart', 'pie', htTDLabels, htTDValues);
+
+            // Dữ liệu vị trí việc làm
+            const vtriVLData = @Html.Raw(Json.Serialize(vtriVL));
+            const vtriVLLabels = vtriVLData.map(item => item.vtriVL);
+            const vtriVLValues = vtriVLData.map(item => item.count);
+            createChart('vtriVLChart', 'pie', vtriVLLabels, vtriVLValues);
+
+            // Xử lý sự kiện thay đổi loại biểu đồ
+            document.querySelectorAll('.chart-type').forEach(select => {
+                select.addEventListener('change', function(e) {
+                    const chartId = this.getAttribute('data-chart');
+                    const chartType = e.target.value;
+                    let labels, data;
+
+                    switch(chartId) {
+                        case 'htTDChart':
+                            labels = htTDLabels;
+                            data = htTDValues;
+                            break;
+                        case 'vtriVLChart':
+                            labels = vtriVLLabels;
+                            data = vtriVLValues;
+                            break;
+                    }
+
+                    createChart(chartId, chartType, labels, data);
+                });
+            });
+        });
+    </script>
+}

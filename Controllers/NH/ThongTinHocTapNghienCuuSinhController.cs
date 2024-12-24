@@ -440,5 +440,51 @@ namespace C500Hemis.Controllers.CTDT
             }
 
         }
+        public async Task<IActionResult> OtherChart()
+        {
+            try
+            {
+                List<TbThongTinHocTapNghienCuuSinh> getall = await TbThongTinHocTapNghienCuuSinhs();
+                // Lấy data cho biểu đồ
+                var ctrDaotao = getall.GroupBy(hv => hv.IdChuongTrinhDaoTao == null
+                                        ? "Không" // Label for null cases
+                                        : hv.IdChuongTrinhDaoTaoNavigation.ChuongTrinhDaoTao)
+                                            .Select(g => new
+                                            {
+                                                ctrDaoTao = g.Key,
+                                                Count = g.Count()
+                                            }).ToList();
+
+                var loaiDaotao = getall.GroupBy(hv => hv.IdLoaiHinhDaoTao == null
+                                        ? "Không" // Label for null cases
+                                        : hv.IdLoaiHinhDaoTaoNavigation.LoaiHinhDaoTao)
+                                            .Select(g => new
+                                            {
+                                                loaiDaoTao = g.Key,
+                                                Count = g.Count()
+                                            }).ToList();
+
+                var ttDaotao = getall.GroupBy(hv => hv.IdTrangThaiHoc == null
+                                        ? "Không" // Label for null cases
+                                        : hv.IdTrangThaiHocNavigation.TrangThaiHoc)
+                                            .Select(g => new
+                                            {
+                                                ttDaoTao = g.Key,
+                                                Count = g.Count()
+                                            }).ToList();
+
+                ViewData["ctrDaotao"] = ctrDaotao;
+                ViewData["loaiDaotao"] = loaiDaotao;
+
+                ViewData["ttDaotao"] = ttDaotao;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+
+        }
     }
 }

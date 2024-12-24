@@ -1,0 +1,197 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHocVien>
+
+@{
+    ViewData["Title"] = "Thống kê kỷ luật";
+    var capQD = ViewData["CapQD"];
+    var loaiKyLuat = ViewData["LoaiKyLuat"];
+}
+
+<div class="container-fluid py-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center py-2">
+                    <h6 class="card-title mb-0">Thống kê theo cấp quyết định</h6>
+                    <select class="form-select form-select-sm" style="width: 130px" id="chartType1">
+                        <option value="pie">Biểu đồ tròn</option>
+                        <option value="bar">Biểu đồ cột</option>
+                        <option value="doughnut">Biểu đồ vòng</option>
+                    </select>
+                </div>
+                <div class="card-body chart-container">
+                    <canvas id="pieChartDisable"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center py-2">
+                    <h6 class="card-title mb-0">Thống kê theo loại kỷ luật</h6>
+                    <select class="form-select form-select-sm" style="width: 130px" id="chartType2">
+                        <option value="pie">Biểu đồ tròn</option>
+                        <option value="bar">Biểu đồ cột</option>
+                        <option value="doughnut">Biểu đồ vòng</option>
+                    </select>
+                </div>
+                <div class="card-body chart-container">
+                    <canvas id="loaiChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 2px 4px rgba(0,0,0,.08);
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #eee;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+
+    .card-title {
+        color: #444;
+        font-size: 0.95rem;
+    }
+
+    .form-select-sm {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    let charts = {};
+    const colors = {
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)'
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ]
+    };
+
+    function createChart(canvasId, type, labels, data) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+
+        if (charts[canvasId]) {
+            charts[canvasId].destroy();
+        }
+
+        const config = {
+            type: type,
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: colors.backgroundColor,
+                    borderColor: colors.borderColor,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 15,
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${context.label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        display: type === 'bar',
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+                    x: {
+                        display: type === 'bar',
+                        ticks: {
+                            font: {
+                                size: 11
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 500
+                }
+            }
+        };
+
+        charts[canvasId] = new Chart(ctx, config);
+    }
+
+    // Khởi tạo dữ liệu
+    const capQDData = @Html.Raw(Json.Serialize(capQD));
+    const loaiKyLuatData = @Html.Raw(Json.Serialize(loaiKyLuat));
+
+    // Khởi tạo biểu đồ khi trang load xong
+    document.addEventListener('DOMContentLoaded', function() {
+        createChart('pieChartDisable', 'pie',
+            capQDData.map(item => item.capQD),
+            capQDData.map(item => item.count)
+        );
+
+        createChart('loaiChart', 'pie',
+            loaiKyLuatData.map(item => item.loaiKyLuat),
+            loaiKyLuatData.map(item => item.count)
+        );
+    });
+
+    // Xử lý sự kiện thay đổi loại biểu đồ
+    document.getElementById('chartType1').addEventListener('change', function(e) {
+        createChart('pieChartDisable', e.target.value,
+            capQDData.map(item => item.capQD),
+            capQDData.map(item => item.count)
+        );
+    });
+
+    document.getElementById('chartType2').addEventListener('change', function(e) {
+        createChart('loaiChart', e.target.value,
+            loaiKyLuatData.map(item => item.loaiKyLuat),
+            loaiKyLuatData.map(item => item.count)
+        );
+    });
+</script>

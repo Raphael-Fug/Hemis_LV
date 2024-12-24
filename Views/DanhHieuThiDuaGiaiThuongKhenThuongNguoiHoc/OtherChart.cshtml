@@ -1,0 +1,229 @@
+﻿@model IEnumerable<C500Hemis.Models.TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc>
+@{
+    ViewData["Title"] = "Thống kê khen thưởng";
+
+    var capKhenThuong = ViewData["CapKhenThuong"];
+    var ptKhenThuong = ViewData["PhuongThucKhenThuong"];
+    var loaiDanhHieu = ViewData["LoaiDanhHieu"];
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Phân bố cấp khen thưởng</h5>
+                    <select class="form-select form-select-sm w-auto" id="chartType1">
+                        <option value="bar">Biểu đồ cột</option>
+                        <option value="line">Biểu đồ đường</option>
+                        <option value="doughnut">Biểu đồ tròn</option>
+                    </select>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Phương thức khen thưởng</h5>
+                    <select class="form-select form-select-sm w-auto" id="chartType2">
+                        <option value="line">Biểu đồ đường</option>
+                        <option value="bar">Biểu đồ cột</option>
+                        <option value="polarArea">Biểu đồ polar</option>
+                    </select>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart1"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Loại danh hiệu thi đua</h5>
+                    <select class="form-select form-select-sm w-auto" id="chartType3">
+                        <option value="polarArea">Biểu đồ polar</option>
+                        <option value="bar">Biểu đồ cột</option>
+                        <option value="doughnut">Biểu đồ tròn</option>
+                    </select>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        transition: transform 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+    .card-body {
+        min-height: 350px;
+    }
+
+    .card-header {
+        background-color: rgba(0, 0, 0, 0.03);
+        padding: 0.75rem 1rem;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    let charts = {};
+    const colors = {
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)'
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ]
+    };
+
+    function createChart(canvasId, type, labels, title, data) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+
+        if (charts[canvasId]) {
+            charts[canvasId].destroy();
+        }
+
+        const config = {
+            type: type,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: title,
+                    data: data,
+                    backgroundColor: colors.backgroundColor,
+                    borderColor: colors.borderColor,
+                    borderWidth: 2,
+                    fill: type === 'line' ? false : true,
+                    tension: type === 'line' ? 0.4 : 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: title,
+                        font: {
+                            size: 16
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.raw;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        display: ['bar', 'line'].includes(type)
+                    }
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true,
+                    duration: 1000
+                }
+            }
+        };
+
+        charts[canvasId] = new Chart(ctx, config);
+        return charts[canvasId];
+    }
+
+    // Khởi tạo dữ liệu
+    const capKhenThuong = @Html.Raw(Json.Serialize(capKhenThuong));
+    const ptKhenThuong = @Html.Raw(Json.Serialize(ptKhenThuong));
+    const loaiDanhHieu = @Html.Raw(Json.Serialize(loaiDanhHieu));
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Khởi tạo các biểu đồ
+        createChart('myChart', 'bar',
+            capKhenThuong.map(item => item.capKhenThuong),
+            'Phân bố cấp khen thưởng',
+            capKhenThuong.map(item => item.count)
+        );
+
+        createChart('myChart1', 'line',
+            ptKhenThuong.map(item => item.ptKhenThuong),
+            'Phương thức khen thưởng',
+            ptKhenThuong.map(item => item.count)
+        );
+
+        createChart('myChart2', 'polarArea',
+            loaiDanhHieu.map(item => item.loaiDanhHieu),
+            'Loại danh hiệu thi đua',
+            loaiDanhHieu.map(item => item.count)
+        );
+
+        // Xử lý sự kiện thay đổi loại biểu đồ
+        ['chartType1', 'chartType2', 'chartType3'].forEach((selectId, index) => {
+            const chartId = `myChart${index || ''}`;
+            const data = [capKhenThuong, ptKhenThuong, loaiDanhHieu][index];
+            const titles = [
+                'Phân bố cấp khen thưởng',
+                'Phương thức khen thưởng',
+                'Loại danh hiệu thi đua'
+            ];
+
+            document.getElementById(selectId).addEventListener('change', function(e) {
+                createChart(chartId, e.target.value,
+                    data.map(item => item[Object.keys(item)[0]]),
+                    titles[index],
+                    data.map(item => item.count)
+                );
+            });
+        });
+    });
+</script>

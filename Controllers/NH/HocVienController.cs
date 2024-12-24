@@ -353,5 +353,28 @@ namespace C500Hemis.Controllers.NH
             }
 
         }
+        //Biểu đổ khác
+        public async Task<IActionResult> OtherChart()
+        {
+            try
+            {
+                List<TbHocVien> getall = await TbHocViens();
+                // Lấy data cho biểu đồ khuyết tật
+                var disabilityCounts = getall.GroupBy(hv => hv.IdLoaiKhuyetTatNavigation == null
+                                        ? "Không" // Label for null cases
+                                        : hv.IdLoaiKhuyetTatNavigation.LoaiKhuyetTat)
+                                            .Select(g => new
+                                            {
+                                                LoaiKhuyetTat = g.Key,
+                                                Count = g.Count()
+                                            }).ToList();
+                ViewData["DisabilityCounts"] = disabilityCounts;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Bảng</title>
+    <title>Raphael</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -28,13 +28,7 @@
     @await RenderSectionAsync("Heads", required: false)
     @await RenderSectionAsync("Styles", required: false)
 
-    <!-- =======================================================
-    * Template Name: Moderna
-    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-    * Updated: Aug 07 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+
 </head>
 <body class="index-page">
     <header id="header" class="header d-flex align-items-center fixed-top">
@@ -49,7 +43,13 @@
                         <a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc"><span>Khen Thưởng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Bảng khen thưởng</a></li>
-                            <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -57,7 +57,13 @@
                         <a href="/HocVien"><span>Học Viên</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/HocVien">Bảng học viên</a></li>
-                            <li><a href="~/HocVien/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/HocVien/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/HocVien/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/HocVien/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -65,7 +71,13 @@
                         <a href="/KyLuatNguoiHoc"><span>Kỷ Luật</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/KyLuatNguoiHoc">Bảng kỷ luật</a></li>
-                            <li><a href="~/KyLuatNguoiHoc/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/KyLuatNguoiHoc/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/KyLuatNguoiHoc/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/KyLuatNguoiHoc/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -73,7 +85,13 @@
                         <a href="/NguoiHocVayTinDung"><span>Vay Tín Dụng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/NguoiHocVayTinDung">Bảng người vay</a></li>
-                            <li><a href="~/NguoiHocVayTinDung/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/NguoiHocVayTinDung/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/NguoiHocVayTinDung/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/NguoiHocVayTinDung/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -81,7 +99,13 @@
                         <a href="/ThongTinHocBong"><span>Học Bổng</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/ThongTinHocBong">Bảng học bổng</a></li>
-                            <li><a href="~/ThongTinHocBong/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/ThongTinHocBong/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/ThongTinHocBong/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/ThongTinHocBong/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -89,7 +113,13 @@
                         <a href="/ThongTinHocTapNghienCuuSinh"><span>NCS</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/ThongTinHocTapNghienCuuSinh">Bảng NCS</a></li>
-                            <li><a href="~/ThongTinHocTapNghienCuuSinh/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/ThongTinHocTapNghienCuuSinh/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/ThongTinHocTapNghienCuuSinh/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/ThongTinHocTapNghienCuuSinh/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -97,7 +127,13 @@
                         <a href="/ThongTinNguoiHocGdtc"><span>GDTC</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/ThongTinNguoiHocGdtc">Bảng GDTC</a></li>
-                            <li><a href="~/ThongTinNguoiHocGdtc/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/ThongTinNguoiHocGdtc/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/ThongTinNguoiHocGdtc/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/ThongTinNguoiHocGdtc/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -105,7 +141,13 @@
                         <a href="/ThongTinViecLamSauTotNghiep"><span>Việc Làm</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/ThongTinViecLamSauTotNghiep">Bảng việc làm</a></li>
-                            <li><a href="~/ThongTinViecLamSauTotNghiep/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/ThongTinViecLamSauTotNghiep/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/ThongTinViecLamSauTotNghiep/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/ThongTinViecLamSauTotNghiep/Create">Tạo mới</a></li>
                         </ul>
                     </li>
@@ -113,7 +155,13 @@
                         <a href="/ThongTinViPham"><span>Vi Phạm</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/ThongTinViPham">Bảng vi phạm</a></li>
-                            <li><a href="~/ThongTinViPham/Chart">Các loại biểu đồ</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Các loại biểu đồ</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <ul>
+                                    <li><a href="~/ThongTinViPham/Chart">Biểu đồ cơ bản</a></li>
+                                    <li><a href="~/ThongTinViPham/OtherChart">Biểu đồ đa dạng</a></li>
+                                </ul>
+                            </li>
                             <li><a href="~/ThongTinViPham/Create">Tạo mới</a></li>
                         </ul>
                     </li>
